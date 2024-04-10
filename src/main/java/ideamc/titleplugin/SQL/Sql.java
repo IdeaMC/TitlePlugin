@@ -21,29 +21,30 @@ public class Sql {
 
             try {
                 // 如果数据表不存在，则创建数据表
-                String createTableSQL_Suffix = "CREATE TABLE IF NOT EXISTS Suffix ";
-                createTableSQL_Suffix += "(suffix_id INT NOT NULL,";
-                createTableSQL_Suffix += "suffix TEXT NOT NULL,";
-                createTableSQL_Suffix += "type TEXT NOT NULL,";
-                createTableSQL_Suffix += "description TEXT,";
-                createTableSQL_Suffix += "vault INT,";
-                createTableSQL_Suffix += "playerpoint INT,";
-                createTableSQL_Suffix += "permission TEXT,";
-                createTableSQL_Suffix += "sale_data TEXT)";
-                statement.executeUpdate(createTableSQL_Suffix);
+                String createTableSQL_Title = "CREATE TABLE IF NOT EXISTS Suffix ";
+                createTableSQL_Title += "(suffix_id INT NOT NULL,";
+                createTableSQL_Title += "suffix TEXT NOT NULL,";
+                createTableSQL_Title += "type TEXT NOT NULL,";
+                createTableSQL_Title += "description TEXT,";
+                createTableSQL_Title += "vault INT,";
+                createTableSQL_Title += "playerpoint INT,";
+                createTableSQL_Title += "permission TEXT,";
+                createTableSQL_Title += "sale_data TEXT)";
+                statement.executeUpdate(createTableSQL_Title);
 
-                String createTableSQL_PlayerSuffix = "CREATE TABLE IF NOT EXISTS PlayerSuffix ";
-                createTableSQL_PlayerSuffix += "(suffix_id INT NOT NULL,";
-                createTableSQL_PlayerSuffix += "plyeruuid TEXT NOT NULL,";
-                createTableSQL_PlayerSuffix += "data TEXT NOT NULL";
-                createTableSQL_PlayerSuffix += "enable TEXT NOT NULL)";
-                statement.executeUpdate(createTableSQL_PlayerSuffix);
+                String createTableSQL_PlayerTitle = "CREATE TABLE IF NOT EXISTS PlayerSuffix ";
+                createTableSQL_PlayerTitle += "(suffix_id INT NOT NULL,";
+                createTableSQL_PlayerTitle += "plyeruuid TEXT NOT NULL,";
+                createTableSQL_PlayerTitle += "data TEXT NOT NULL,";
+                createTableSQL_PlayerTitle += "prefix_enable TEXT NOT NULL,";
+                createTableSQL_PlayerTitle += "suffix_enable TEXT NOT NULL)";
+                statement.executeUpdate(createTableSQL_PlayerTitle);
             } catch (SQLException e) {
-                Bukkit.getConsoleSender().sendMessage("[PlayerSuffix]§2" + e);
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);
             }
 
         } catch (ClassNotFoundException | SQLException e) {
-            Bukkit.getConsoleSender().sendMessage("[PlayerSuffix]§2" + e);
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);
         } finally {
             // 关闭连接和 Statement
             try {
@@ -54,7 +55,7 @@ public class Sql {
                     connection.close();
                 }
             } catch (SQLException e) {
-                Bukkit.getConsoleSender().sendMessage("[PlayerSuffix]§2" + e);;
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);;
             }
         }
     }
