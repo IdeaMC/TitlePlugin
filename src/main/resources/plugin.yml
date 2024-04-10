@@ -2,6 +2,3 @@ name: TitlePlugin
 version: '${project.version}'
 main: ideamc.titleplugin.TitlePlugin
 api-version: '1.13'
-authors:
-  - suxiaolin
-  - xiantiao

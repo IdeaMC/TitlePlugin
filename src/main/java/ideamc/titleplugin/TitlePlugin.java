@@ -2,7 +2,7 @@ package ideamc.titleplugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class TitlePlugin extends JavaPlugin {
+public final class TitlePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
