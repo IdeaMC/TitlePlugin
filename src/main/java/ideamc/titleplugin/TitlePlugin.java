@@ -15,22 +15,27 @@ public class TitlePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        //挂钩vault
         if (!setupEconomy() ) {
-            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置Vault未找到已禁用本插件!");
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置Vault未找到,金币购买功能无法使用!");
+        }else{
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2前置Vault已找到!");
         }
-
+        //挂钩playerpoints
         if (Bukkit.getPluginManager().isPluginEnabled("PlayerPoints")) {
             this.playerpointsAPI = PlayerPoints.getInstance().getAPI();
-            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§a前置PlayerPoints已找到!");
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2前置PlayerPoints已找到!");
+        }else{
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置PlayerPoints未找到,点券购买功能无法使用!");
         }
 
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
     }
 
+    //检测vault是否存在并注册
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;

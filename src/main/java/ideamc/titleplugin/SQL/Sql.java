@@ -59,4 +59,8 @@ public class Sql {
             }
         }
     }
+
+    public void createtitle(){
+
+    }
 }
