@@ -13,9 +13,9 @@ public class Point {
         UUID playeruuid = player.getUniqueId();
 
         PlayerPointsAPI ppapi = TitlePlugin.getPlayerPointsAPI();
-        boolean response = ppapi.take(playeruuid,playerpoint);
+        boolean r = ppapi.take(playeruuid,playerpoint);
 
-        if(response){
+        if(r){
             player.sendMessage("[TitlePlugin]§2购买成功,剩余点券" + ppapi.look(playeruuid));
             return true;
         }else{
