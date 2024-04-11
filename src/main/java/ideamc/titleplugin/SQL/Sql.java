@@ -5,9 +5,9 @@ import org.bukkit.Bukkit;
 import java.sql.*;
 
 public class Sql {
+    private Connection connection = null;
+    private Statement statement = null;
     public void LoadSQLite(){
-        Connection connection = null;
-        Statement statement = null;
 
         try {
             // 注册 SQLite 数据库驱动
@@ -28,10 +28,10 @@ public class Sql {
                 createTableSQL_Title += "description TEXT,";
                 createTableSQL_Title += "vault INT,";
                 createTableSQL_Title += "playerpoints INT,";
-                createTableSQL_Title += "canbuy boolean,";
+                createTableSQL_Title += "canbuy boolean,";//能否购买
                 createTableSQL_Title += "permission TEXT,";
-                createTableSQL_Title += "expiration_date TEXT,";
-                createTableSQL_Title += "sale_end_date TEXT)";
+                createTableSQL_Title += "expiration_date TEXT,";//购买有效期
+                createTableSQL_Title += "sale_end_date TEXT)";//限时销售截止日期
                 statement.executeUpdate(createTableSQL_Title);
 
                 String createTableSQL_PlayerTitle = "CREATE TABLE IF NOT EXISTS PlayerTitle ";
@@ -47,22 +47,25 @@ public class Sql {
 
         } catch (ClassNotFoundException | SQLException e) {
             Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);
-        } finally {
-            // 关闭连接和 Statement
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);;
-            }
         }
     }
 
-    public void createtitle(){
+    //卸载数据库连接
+    public void unLoadSQLite(){
 
+        try {
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);;
+        }
+    }
+    //创建title
+    public void createtitle(String type,String title_name){
+        String data = "";
     }
 }
