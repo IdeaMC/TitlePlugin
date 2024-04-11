@@ -7,16 +7,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class coin {
-    public boolean removecoin(String playername, int coin)
-    {
+    public boolean removecoin(String playername, int coin) {
+        Player player = Bukkit.getPlayer(playername);
+
         Economy economy = TitlePlugin.getEconomy();
         EconomyResponse r = economy.withdrawPlayer(playername, coin);
-        Player player = Bukkit.getPlayer(playername);
+
         if(r.transactionSuccess()) {
-            player.sendMessage(String.format("成功扣除金币 %s 剩余金币 %s", economy.format(r.amount), economy.format(r.balance)));
+            player.sendMessage(String.format("[TitlePlugin]§2购买成功,剩余金币 %s",economy.format(r.balance)));
             return true;
         } else {
-            player.sendMessage(String.format("发生错误: %s", r.errorMessage));
+            player.sendMessage(String.format("[TitlePlugin]§4发生错误: %s", r.errorMessage));
             return false;
         }
     }
