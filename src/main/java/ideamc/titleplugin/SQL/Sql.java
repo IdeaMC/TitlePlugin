@@ -30,13 +30,13 @@ public class Sql {
                 createTableSQL_Title += "playerpoint INT,";
                 createTableSQL_Title += "canbuy boolean,";
                 createTableSQL_Title += "permission TEXT,";
-                createTableSQL_Title += "sale_data TEXT)";
+                createTableSQL_Title += "sale_date TEXT)";
                 statement.executeUpdate(createTableSQL_Title);
 
                 String createTableSQL_PlayerTitle = "CREATE TABLE IF NOT EXISTS PlayerSuffix ";
                 createTableSQL_PlayerTitle += "(suffix_id INT NOT NULL,";
                 createTableSQL_PlayerTitle += "plyeruuid TEXT NOT NULL,";
-                createTableSQL_PlayerTitle += "data TEXT NOT NULL,";
+                createTableSQL_PlayerTitle += "date TEXT NOT NULL,";
                 createTableSQL_PlayerTitle += "prefix_enable boolean NOT NULL,";
                 createTableSQL_PlayerTitle += "suffix_enable boolean NOT NULL)";
                 statement.executeUpdate(createTableSQL_PlayerTitle);
