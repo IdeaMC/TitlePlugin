@@ -28,6 +28,7 @@ public class Sql {
                 createTableSQL_Title += "description TEXT,";
                 createTableSQL_Title += "vault INT,";
                 createTableSQL_Title += "playerpoint INT,";
+                createTableSQL_Title += "canbuy boolean,";
                 createTableSQL_Title += "permission TEXT,";
                 createTableSQL_Title += "sale_data TEXT)";
                 statement.executeUpdate(createTableSQL_Title);
@@ -36,8 +37,8 @@ public class Sql {
                 createTableSQL_PlayerTitle += "(suffix_id INT NOT NULL,";
                 createTableSQL_PlayerTitle += "plyeruuid TEXT NOT NULL,";
                 createTableSQL_PlayerTitle += "data TEXT NOT NULL,";
-                createTableSQL_PlayerTitle += "prefix_enable TEXT NOT NULL,";
-                createTableSQL_PlayerTitle += "suffix_enable TEXT NOT NULL)";
+                createTableSQL_PlayerTitle += "prefix_enable boolean NOT NULL,";
+                createTableSQL_PlayerTitle += "suffix_enable boolean NOT NULL)";
                 statement.executeUpdate(createTableSQL_PlayerTitle);
             } catch (SQLException e) {
                 Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);
