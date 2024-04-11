@@ -22,7 +22,7 @@ public class Sql {
             try {
                 // 如果数据表不存在，则创建数据表
                 String createTableSQL_Title = "CREATE TABLE IF NOT EXISTS Suffix ";
-                createTableSQL_Title += "(suffix_id INT NOT NULL,";
+                createTableSQL_Title += "(suffix_id INT AUTO_INCREMENT PRIMARY KEY,";
                 createTableSQL_Title += "suffix TEXT NOT NULL,";
                 createTableSQL_Title += "type TEXT NOT NULL,";
                 createTableSQL_Title += "description TEXT,";
