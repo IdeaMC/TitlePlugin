@@ -21,7 +21,7 @@ public class Sql {
 
             try {
                 // 如果数据表不存在，则创建数据表
-                String createTableSQL_Title = "CREATE TABLE IF NOT EXISTS Suffix ";
+                String createTableSQL_Title = "CREATE TABLE IF NOT EXISTS Title ";
                 createTableSQL_Title += "(suffix_id INT AUTO_INCREMENT PRIMARY KEY,";
                 createTableSQL_Title += "suffix TEXT NOT NULL,";
                 createTableSQL_Title += "type TEXT NOT NULL,";
@@ -34,7 +34,7 @@ public class Sql {
                 createTableSQL_Title += "sale_end_date TEXT)";
                 statement.executeUpdate(createTableSQL_Title);
 
-                String createTableSQL_PlayerTitle = "CREATE TABLE IF NOT EXISTS PlayerSuffix ";
+                String createTableSQL_PlayerTitle = "CREATE TABLE IF NOT EXISTS PlayerTitle ";
                 createTableSQL_PlayerTitle += "(suffix_id INT NOT NULL,";
                 createTableSQL_PlayerTitle += "plyeruuid TEXT NOT NULL,";
                 createTableSQL_PlayerTitle += "expiration_date TEXT NOT NULL,";
