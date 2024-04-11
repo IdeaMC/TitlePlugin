@@ -27,16 +27,17 @@ public class Sql {
                 createTableSQL_Title += "type TEXT NOT NULL,";
                 createTableSQL_Title += "description TEXT,";
                 createTableSQL_Title += "vault INT,";
-                createTableSQL_Title += "playerpoint INT,";
+                createTableSQL_Title += "playerpoints INT,";
                 createTableSQL_Title += "canbuy boolean,";
                 createTableSQL_Title += "permission TEXT,";
-                createTableSQL_Title += "sale_date TEXT)";
+                createTableSQL_Title += "expiration_date TEXT,";
+                createTableSQL_Title += "sale_end_date TEXT)";
                 statement.executeUpdate(createTableSQL_Title);
 
                 String createTableSQL_PlayerTitle = "CREATE TABLE IF NOT EXISTS PlayerSuffix ";
                 createTableSQL_PlayerTitle += "(suffix_id INT NOT NULL,";
                 createTableSQL_PlayerTitle += "plyeruuid TEXT NOT NULL,";
-                createTableSQL_PlayerTitle += "date TEXT NOT NULL,";
+                createTableSQL_PlayerTitle += "expiration_date TEXT NOT NULL,";
                 createTableSQL_PlayerTitle += "prefix_enable boolean NOT NULL,";
                 createTableSQL_PlayerTitle += "suffix_enable boolean NOT NULL)";
                 statement.executeUpdate(createTableSQL_PlayerTitle);
