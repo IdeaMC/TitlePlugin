@@ -1,6 +1,7 @@
 package ideamc.titleplugin.SQL;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 
 import java.sql.*;
 
@@ -65,7 +66,11 @@ public class Sql {
         }
     }
     //创建title
-    public void createtitle(String type,String title_name){
-        String data = "";
+    public void query(String sql, CommandSender sender) {
+        try {
+            statement.executeUpdate(sql);
+        }catch (SQLException e){
+            sender.sendMessage("[TitlePlugin]§2" + e);;
+        }
     }
 }

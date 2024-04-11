@@ -2,6 +2,14 @@ name: TitlePlugin
 version: '${project.version}'
 main: ideamc.titleplugin.TitlePlugin
 api-version: '1.13'
+folia-supported: true
 authors:
   - suxiaolin
   - xiantiao
+commands:
+  titleplugin:
+    description: 'TitlePlugin'
+    usage: '/titleplugin'
+    permission: 'titleplugin.command'
+    permission-message: 'You do not have permission to use this command.'
+

@@ -1,5 +1,6 @@
 package ideamc.titleplugin;
 
+import ideamc.titleplugin.Command.AdminCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,6 +16,7 @@ public class TitlePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        new AdminCommand(this);
         //挂钩vault
         if (!setupEconomy() ) {
             Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置Vault未找到,金币购买功能无法使用!");
