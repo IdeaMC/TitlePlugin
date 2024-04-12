@@ -38,7 +38,7 @@ public class Sql {
                 String createTableSQL_PlayerTitle = "CREATE TABLE IF NOT EXISTS PlayerTitle ";
                 createTableSQL_PlayerTitle += "(title_id INT NOT NULL,";
                 createTableSQL_PlayerTitle += "plyeruuid TEXT NOT NULL,";
-                createTableSQL_PlayerTitle += "expiration_date TEXT NOT NULL,";
+                createTableSQL_PlayerTitle += "expiration_date TEXT,";
                 createTableSQL_PlayerTitle += "prefix_enable boolean NOT NULL,";
                 createTableSQL_PlayerTitle += "suffix_enable boolean NOT NULL)";
                 statement.executeUpdate(createTableSQL_PlayerTitle);
