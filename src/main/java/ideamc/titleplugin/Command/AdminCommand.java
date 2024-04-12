@@ -16,7 +16,6 @@ public class AdminCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(command.getName().equals("titleplugin") && args[0].equalsIgnoreCase("test")){
             CreateTitle ct = new CreateTitle();
-            ct.create(commandSender,"title","test");
             commandSender.sendMessage("test");
             return true;
         }
