@@ -7,13 +7,13 @@ import org.bukkit.command.CommandSender;
 // /ps create [type] [title名称] [coin/playerpoints/permission]
 public class CreateTitle {
     //活动title的创建
-    public void create(CommandSender sender, String type, String title_name, String description){
+    public void create(CommandSender sender, String type, String titleName, String description){
         String sql = null;
-        if(type.equalsIgnoreCase("activity")){
+        if("activity".equalsIgnoreCase(type)){
             sql = "INSERT INTO Title (type,title_name,description,canbuy) ";
             sql += "VALUES ";
             sql += "('activity',";
-            sql += "'"+title_name+"',";
+            sql += "'"+titleName+"',";
             sql += "'"+description+"',";
             sql += "false)";
         }
@@ -24,21 +24,21 @@ public class CreateTitle {
         }
     }
     //点券or金币title的创建
-    public void create(CommandSender sender,String type,String title_name,String description,int vault){
+    public void create(CommandSender sender, String type, String titleName, String description, int vault){
         String sql =null;
-        if(type.equalsIgnoreCase("coin")){
+        if("coin".equalsIgnoreCase(type)){
             sql = "INSERT INTO Title (type,title_name,description,vault) ";
             sql += "VALUES ";
             sql += "('coin',";
-            sql += "'"+title_name+"',";
+            sql += "'"+titleName+"',";
             sql += "'"+description+"',";
             sql += vault+",";
             sql += "true)";
-        } else if(type.equalsIgnoreCase("points")){
+        } else if("points".equalsIgnoreCase(type)){
             sql = "INSERT INTO Title (type,title_name,description,vault) ";
             sql += "VALUES ";
             sql += "('points',";
-            sql += "'"+title_name+"',";
+            sql += "'"+titleName+"',";
             sql += "'"+description+"',";
             sql += vault+",";
             sql += "true)";
@@ -50,13 +50,13 @@ public class CreateTitle {
         }
     }
     //权限title的创建
-    public void create(CommandSender sender,String type,String title_name,String descripition,String permission){
+    public void create(CommandSender sender, String type, String titleName, String descripition, String permission){
         String sql =null;
-        if(type.equalsIgnoreCase("permission")){
+        if("permission".equalsIgnoreCase(type)){
             sql = "INSERT INTO Title (type,title_name,description,permission) ";
             sql += "VALUES ";
             sql += "('permission',";
-            sql += "'"+title_name+"',";
+            sql += "'"+titleName+"',";
             sql += "'"+descripition+"',";
             sql += "'"+permission+"',";
             sql += "false)";
