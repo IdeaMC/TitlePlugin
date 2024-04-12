@@ -31,7 +31,7 @@ public class Sql {
                 createTableSQL_Title += "playerpoints INT,";//所需点券
                 createTableSQL_Title += "canbuy boolean,";//能否购买
                 createTableSQL_Title += "permission TEXT,";//所需权限
-                createTableSQL_Title += "expiration_date TEXT,";//购买有效期
+                createTableSQL_Title += "expiration_date INT,";//购买有效期
                 createTableSQL_Title += "sale_end_date TEXT)";//限时销售截止日期
                 statement.executeUpdate(createTableSQL_Title);
 
@@ -97,5 +97,37 @@ public class Sql {
         }else{
             return false;
         }
+    }
+
+    public static ResultSet readquery(String sql, CommandSender sender){
+        try {
+            // 连接到数据库
+            connection = DriverManager.getConnection("jdbc:sqlite:./plugins/TitlePlugin/TitlePlugin.db");
+            // 创建 Statement 对象
+            statement = connection.createStatement();
+        }catch (SQLException e){
+            sender.sendMessage("[TitlePlugin]§2" + e);;
+        }
+        if(statement != null && connection != null){
+            try {
+                return statement.executeQuery(sql);
+            }catch (SQLException e){
+                sender.sendMessage("[TitlePlugin]§2" + e);
+            }finally {
+                try {
+                    if (statement != null) {
+                        statement.close();
+                        statement = null;
+                    }
+                    if (connection != null) {
+                        connection.close();
+                        connection = null;
+                    }
+                } catch (SQLException e) {
+                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);;
+                }
+            }
+        }
+        return null;
     }
 }

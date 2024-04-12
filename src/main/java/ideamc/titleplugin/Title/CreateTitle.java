@@ -24,14 +24,14 @@ public class CreateTitle {
         }
     }
     //点券or金币title的创建
-    public void create(CommandSender sender,String type,String title_name,String descripition,int vault){
+    public void create(CommandSender sender,String type,String title_name,String description,int vault){
         String sql =null;
         if(type.equalsIgnoreCase("coin")){
             sql = "INSERT INTO Title (type,title_name,description,vault) ";
             sql += "VALUES ";
             sql += "('coin',";
             sql += "'"+title_name+"',";
-            sql += "'"+descripition+"',";
+            sql += "'"+description+"',";
             sql += vault+",";
             sql += "true)";
         } else if(type.equalsIgnoreCase("points")){
@@ -39,7 +39,7 @@ public class CreateTitle {
             sql += "VALUES ";
             sql += "('points',";
             sql += "'"+title_name+"',";
-            sql += "'"+descripition+"',";
+            sql += "'"+description+"',";
             sql += vault+",";
             sql += "true)";
         }
