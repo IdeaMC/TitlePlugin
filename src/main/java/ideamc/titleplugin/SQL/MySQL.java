@@ -50,7 +50,7 @@ public class MySQL implements sqlchoose{
                 createTableSQL_Title += "playerpoints INT,";//所需点券
                 createTableSQL_Title += "canbuy BOOLEAN,";//能否购买
                 createTableSQL_Title += "permission TEXT,";//所需权限
-                createTableSQL_Title += "expiration_date INT,";//购买有效期
+                createTableSQL_Title += "youxiao INT,";//购买有效期
                 createTableSQL_Title += "sale_end_date TEXT)";//限时销售截止日期
                 statement.executeUpdate(createTableSQL_Title);
 
@@ -139,4 +139,5 @@ public class MySQL implements sqlchoose{
         }
         return null;
     }
+
 }

@@ -1,7 +1,6 @@
 package ideamc.titleplugin.Title;
 
 import ideamc.titleplugin.Date;
-import ideamc.titleplugin.TitlePlugin;
 import org.bukkit.command.CommandSender;
 
 import java.sql.ResultSet;
@@ -85,7 +84,7 @@ public class EditTitle {
             }
         }else if(changetype.equalsIgnoreCase("setyouxiao")){
             String sql = "UPDATE Title ";
-            sql += "SET expiration_date = " + a;
+            sql += "SET youxiao = " + a;
             sql += " WHERE title_id = " + title_id;
             if(Sql().query(sql,sender)){
                 sender.sendMessage("§2[TitlePlugin]修改成功!");

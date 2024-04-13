@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import java.util.UUID;
 
 public class Point {
-    public boolean removeplayerpoint(String playername,int playerpoint){
+    public static boolean removeplayerpoint(String playername,int playerpoint){
         Player player = Bukkit.getPlayer(playername);
         UUID playeruuid = player.getUniqueId();
 

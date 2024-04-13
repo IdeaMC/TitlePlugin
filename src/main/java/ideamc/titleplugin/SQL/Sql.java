@@ -30,15 +30,15 @@ public class Sql implements sqlchoose{
                 createTableSQL_Title += "vault INT,";//所需金币
                 createTableSQL_Title += "playerpoints INT,";//所需点券
                 createTableSQL_Title += "canbuy BOOLEAN,";//能否购买
-                createTableSQL_Title += "permission TEXT,";//所需权限
-                createTableSQL_Title += "expiration_date INT,";//购买有效期
-                createTableSQL_Title += "sale_end_date TEXT)";//限时销售截止日期
+                createTableSQL_Title += "permission TEXT NULL,";//所需权限
+                createTableSQL_Title += "youxiao INT,";//购买有效期
+                createTableSQL_Title += "sale_end_date TEXT NULL)";//限时销售截止日期
                 statement.executeUpdate(createTableSQL_Title);
 
                 String createTableSQL_PlayerTitle = "CREATE TABLE IF NOT EXISTS PlayerTitle ";
                 createTableSQL_PlayerTitle += "(title_id INT NOT NULL,";
-                createTableSQL_PlayerTitle += "plyeruuid TEXT NOT NULL,";
-                createTableSQL_PlayerTitle += "expiration_date TEXT,";
+                createTableSQL_PlayerTitle += "player_uuid TEXT NOT NULL,";
+                createTableSQL_PlayerTitle += "expiration_date TEXT NULL,";
                 createTableSQL_PlayerTitle += "prefix_enable boolean NOT NULL,";
                 createTableSQL_PlayerTitle += "suffix_enable boolean NOT NULL)";
                 statement.executeUpdate(createTableSQL_PlayerTitle);

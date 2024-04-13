@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class coin {
-    public boolean removecoin(String playername, int coin) {
+    public static boolean removecoin(String playername, int coin) {
         Player player = Bukkit.getPlayer(playername);
 
         Economy economy = TitlePlugin.getEconomy();
