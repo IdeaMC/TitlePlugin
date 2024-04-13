@@ -1,21 +1,35 @@
 package ideamc.titleplugin;
 
 import ideamc.titleplugin.Command.AdminCommand;
+import ideamc.titleplugin.SQL.Sql;
+import ideamc.titleplugin.SQL.MySQL;
+import ideamc.titleplugin.SQL.sqlchoose;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
 import org.black_ixx.playerpoints.PlayerPoints;
 
 public class TitlePlugin extends JavaPlugin {
-
+    private static FileConfiguration config;
     private static Economy econ = null;
     private PlayerPointsAPI playerpointsAPI;
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
+        config = getConfig();
+
+        if(config.getString("SQL.type").equalsIgnoreCase("mysql")){
+            MySQL.MysqlConfig();
+            MySQL.LoadMysql();
+        }else{
+            Sql.LoadSQLite();
+        }
+
         new AdminCommand(this);
         //挂钩vault
         if (!setupEconomy() ) {
@@ -56,5 +70,17 @@ public class TitlePlugin extends JavaPlugin {
 
     public static PlayerPointsAPI getPlayerPointsAPI() {
         return getPlayerPointsAPI();
+    }
+
+    public static FileConfiguration getconfig() {
+        return config;
+    }
+
+    public static sqlchoose Sql(){
+        if(config.getString("SQL.type").equalsIgnoreCase("mysql")){
+            return new MySQL();
+        }else{
+            return new Sql();
+        }
     }
 }

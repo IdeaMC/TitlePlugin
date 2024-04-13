@@ -1,6 +1,6 @@
 package ideamc.titleplugin.Title;
 
-import ideamc.titleplugin.SQL.Sql;
+import static ideamc.titleplugin.TitlePlugin.Sql;
 import org.bukkit.command.CommandSender;
 
 
@@ -17,7 +17,7 @@ public class CreateTitle {
             sql += "'"+description+"',";
             sql += "false)";
         }
-        if(Sql.query(sql,sender)){
+        if(Sql().query(sql,sender)){
             sender.sendMessage("§2[TitlePlugin]创建成功!");
         }else{
             sender.sendMessage("§4l[TitlePlugin]创建失败!");
@@ -43,7 +43,7 @@ public class CreateTitle {
             sql += vault+",";
             sql += "true)";
         }
-        if(Sql.query(sql,sender)){
+        if(Sql().query(sql,sender)){
             sender.sendMessage("§2[TitlePlugin]创建成功!");
         }else{
             sender.sendMessage("§4[TitlePlugin]创建失败!");
@@ -61,7 +61,7 @@ public class CreateTitle {
             sql += "'"+permission+"',";
             sql += "false)";
         }
-        if(Sql.query(sql,sender)){
+        if(Sql().query(sql,sender)){
             sender.sendMessage("§2[TitlePlugin]创建成功!");
         }else{
             sender.sendMessage("§4[TitlePlugin]创建失败!");

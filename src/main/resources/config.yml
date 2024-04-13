@@ -1,0 +1,10 @@
+#检查更新
+checkupdata: true
+#数据库类型及配置 type里填 sql / mysql
+SQL:
+  type: sql
+  host: 127.0.0.1
+  port: 3306
+  database:
+  username: root
+  password:

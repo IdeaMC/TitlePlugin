@@ -5,10 +5,10 @@ import org.bukkit.command.CommandSender;
 
 import java.sql.*;
 
-public class Sql {
+public class Sql implements sqlchoose{
     private static Connection connection = null;
     private static Statement statement = null;
-    public void LoadSQLite(){
+    public static void LoadSQLite(){
 
         try {
             // 注册 SQLite 数据库驱动
@@ -63,8 +63,8 @@ public class Sql {
             }
         }
     }
-
-    public static boolean query(String sql, CommandSender sender){
+    @Override
+    public boolean query(String sql, CommandSender sender){
         try {
             // 连接到数据库
             connection = DriverManager.getConnection("jdbc:sqlite:./plugins/TitlePlugin/TitlePlugin.db");
@@ -98,8 +98,8 @@ public class Sql {
             return false;
         }
     }
-
-    public static ResultSet readquery(String sql, CommandSender sender){
+    @Override
+    public ResultSet readquery(String sql, CommandSender sender){
         try {
             // 连接到数据库
             connection = DriverManager.getConnection("jdbc:sqlite:./plugins/TitlePlugin/TitlePlugin.db");
