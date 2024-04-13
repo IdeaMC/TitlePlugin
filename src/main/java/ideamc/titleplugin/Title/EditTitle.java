@@ -73,6 +73,7 @@ public class EditTitle {
             }else{
                 sender.sendMessage("§4[TitlePlugin]修改失败!");
             }
+        }else if(changetype.equalsIgnoreCase("setjiezhi")){
         }
     }
 }
