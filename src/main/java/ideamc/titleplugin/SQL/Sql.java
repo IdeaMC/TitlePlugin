@@ -29,7 +29,7 @@ public class Sql {
                 createTableSQL_Title += "description TEXT,";
                 createTableSQL_Title += "vault INT,";//所需金币
                 createTableSQL_Title += "playerpoints INT,";//所需点券
-                createTableSQL_Title += "canbuy boolean,";//能否购买
+                createTableSQL_Title += "canbuy BOOLEAN,";//能否购买
                 createTableSQL_Title += "permission TEXT,";//所需权限
                 createTableSQL_Title += "expiration_date INT,";//购买有效期
                 createTableSQL_Title += "sale_end_date TEXT)";//限时销售截止日期

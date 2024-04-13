@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+import static java.util.function.Predicate.isEqual;
+
 public class Date {
     //获取当前日期
     public static String getCurrentDate() {
@@ -31,7 +33,7 @@ public class Date {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         LocalDate date1 = LocalDate.parse(givenDate, formatter);//指定日期
         LocalDate date2 = LocalDate.now();//当前日期
-        return date1.isAfter(date2);
+        return date1.isAfter(date2) || date1.isEqual(date2);
     }
     //计算指定日期加n天后的日期
     public static String addDaysToDate(String givenDate, int n) {
