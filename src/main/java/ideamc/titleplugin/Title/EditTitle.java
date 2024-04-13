@@ -59,6 +59,20 @@ public class EditTitle {
             String sql = "UPDATE Title ";
             sql += "SET playerpoints = " + a;
             sql += " WHERE title_id = " + title_id;
+            if(Sql.query(sql,sender)){
+                sender.sendMessage("§2[TitlePlugin]修改成功!");
+            }else{
+                sender.sendMessage("§4[TitlePlugin]修改失败!");
+            }
+        }else if(changetype.equalsIgnoreCase("setyouxiao")){
+            String sql = "UPDATE Title ";
+            sql += "SET expiration_date = " + a;
+            sql += " WHERE title_id = " + title_id;
+            if(Sql.query(sql,sender)){
+                sender.sendMessage("§2[TitlePlugin]修改成功!");
+            }else{
+                sender.sendMessage("§4[TitlePlugin]修改失败!");
+            }
         }
     }
 }
