@@ -1,4 +1,4 @@
 package ideamc.titleplugin.SQL;
 
-public class Mysql {
+public class MySQL {
 }
