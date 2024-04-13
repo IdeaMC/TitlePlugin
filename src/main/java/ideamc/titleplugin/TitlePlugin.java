@@ -1,7 +1,12 @@
 package ideamc.titleplugin;
 
 import ideamc.titleplugin.Command.AdminCommand;
+import ideamc.titleplugin.utils.TitleIm;
+import ideamc.titleplugin.utils.TitlePlayer;
+import ideamc.titleplugin.utils.TitleType;
+import ideamc.titleplugin.utils.interfaces.Title;
 import org.bukkit.Bukkit;
+import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -56,5 +61,25 @@ public class TitlePlugin extends JavaPlugin {
 
     public static PlayerPointsAPI getPlayerPointsAPI() {
         return getPlayerPointsAPI();
+    }
+
+
+    // TODO 这是个测试方法
+    protected static void test() {
+        // 创建一个前缀类型的Title
+        Title title = new TitleIm(TitleType.PREFIX);
+        // 设置Title的显示文字
+        title.setDisplay("[IdeaMC]");
+        //设置Vault购买价格 500 3600天
+        title.price().setVault(500,311040000000L);
+        //设置Point购买价格 100 3600天
+        title.price().setPoint(500,311040000000L);
+        //设置Permission购买 3600天
+        title.price().setPermission(new Permission("ideamc.admin"),311040000000L);
+        
+        
+        TitlePlayer titlePlayer = new TitlePlayer();
+        titlePlayer.addTitle(title);
+
     }
 }
