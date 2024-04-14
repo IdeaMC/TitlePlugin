@@ -1,6 +1,7 @@
 package ideamc.titleplugin;
 
 import ideamc.titleplugin.Command.AdminCommand;
+import ideamc.titleplugin.Command.PlayerCommand;
 import ideamc.titleplugin.Event.TitleSaleEndDateEvent;
 import ideamc.titleplugin.Event.playerJoinEvent;
 import ideamc.titleplugin.SQL.Sql;
@@ -35,6 +36,9 @@ public class TitlePlugin extends JavaPlugin {
         }
 
         new AdminCommand(this);
+        new PlayerCommand(this);
+        new AdminCommand(this);
+
         //挂钩vault
         if (!setupEconomy() ) {
             Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置Vault未找到,金币购买功能无法使用!");
