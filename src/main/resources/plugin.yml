@@ -7,9 +7,16 @@ authors:
   - suxiaolin
   - xiantiao
 commands:
-  titleplugin:
-    description: 'TitlePlugin'
-    usage: '/titleplugin'
-    permission: 'titleplugin.command'
+  tip:
+    description: 'player command of TitlePlugin'
+    usage: '/tip'
+    permission: 'titleplugin.player'
     permission-message: 'You do not have permission to use this command.'
+    default: true
+  atip:
+    description: 'op command of TitlePlugin'
+    usage: '/atip'
+    permission: 'titleplugin.op'
+    permission-message: 'You do not have permission to use this command.'
+    default: op
 

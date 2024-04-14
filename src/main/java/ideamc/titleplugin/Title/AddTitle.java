@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 public class AddTitle {
-    public void addtitle(CommandSender sender, String playername, int title_id){
+    public static void addtitle(CommandSender sender, String playername, int title_id){
         String stplayer_uuid = Bukkit.getPlayer(playername).getUniqueId().toString();
         String sql = "INSERT INTO PlayerTitle (player_uuid, title_id, prefix_enable, suffix_enable) VALUES ";
         sql += "('" + stplayer_uuid + "', '";
@@ -21,7 +21,7 @@ public class AddTitle {
         }
     }
 
-    public void addtitle(CommandSender sender, String playername, int title_id, int youxiao){
+    public static void addtitle(CommandSender sender, String playername, int title_id, int youxiao){
         String stplayer_uuid = Bukkit.getPlayer(playername).getUniqueId().toString();
         String expiration_date = Date.addDaysToDate(Date.getCurrentDate(), youxiao);
         String sql = "INSERT INTO PlayerTitle (player_uuid, title_id, expiration_date, prefix_enable, suffix_enable) VALUES ";

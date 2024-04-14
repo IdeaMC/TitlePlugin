@@ -12,7 +12,7 @@ import java.util.Objects;
 // /ps create [type] [title名称] [coin/playerpoints/permission]
 public class CreateTitle {
     //活动title的创建
-    public void create(CommandSender sender, String type, String titleName, String description){
+    public static void createtitle(CommandSender sender, String type, String titleName, String description){
         String sql = null;
         String Ctitlename = titleName;
         if(titleName.contains("&#")){
@@ -45,7 +45,7 @@ public class CreateTitle {
         }
     }
     //点券or金币title的创建
-    public void create(CommandSender sender, String type, String titleName, String description, int vault){
+    public static void createtitle(CommandSender sender, String type, String titleName, String description, int vault){
         String sql =null;
         String Ctitlename = titleName;
         if(titleName.contains("&#")){
@@ -88,7 +88,7 @@ public class CreateTitle {
         }
     }
     //权限title的创建
-    public void create(CommandSender sender, String type, String titleName, String descripition, String permission){
+    public static void createtitle(CommandSender sender, String type, String titleName, String descripition, String permission){
         String sql =null;
         String Ctitlename = titleName;
         if(titleName.contains("&#")){

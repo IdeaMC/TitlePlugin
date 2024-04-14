@@ -11,8 +11,8 @@ import static ideamc.titleplugin.TitlePlugin.Sql;
 
 public class EditTitle {
 
-    //permission和description和能否购买的修改
-    public void edit(CommandSender sender, int title_id, String changetype, String a){
+    //permission和description和能否购买和截止日期的删除的修改
+    public static void edittitle(CommandSender sender, int title_id, String changetype, String a){
         if(changetype.equalsIgnoreCase("setpermission")){
             String sql = "UPDATE Title ";
             sql += "SET permission = " + a;
@@ -71,7 +71,7 @@ public class EditTitle {
         }
     }
     //硬币和点券和购买有效期和购买截止日期的修改
-    public void edit(CommandSender sender, int title_id, String changetype, int a){
+    public static void edittitle(CommandSender sender, int title_id, String changetype, int a){
         if(changetype.equalsIgnoreCase("setcoin")){
             String sql = "UPDATE Title ";
             sql += "SET coin = " + a;

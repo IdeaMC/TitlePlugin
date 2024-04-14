@@ -13,21 +13,21 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-import static ideamc.titleplugin.GUI.biyao.readshopdatabase;
-import static ideamc.titleplugin.GUI.biyao.createShopTitleItem;
+import static ideamc.titleplugin.GUI.biyao.createGeRenTitleItem;
+import static ideamc.titleplugin.GUI.biyao.readgerendatabase;
 
-public class ShopGui implements Listener {
+public class GeRenGui implements Listener {
     private static final int itemsPerPage = 45; // 每页45个物品
     private static int totalPages;
     private static int currentPage;
     private static Inventory gui;
     private static List<biyao.TitleData> titles;
-    public static void showShopGui(CommandSender sender) {
-        titles = readshopdatabase((Player) sender);
+    public static void showGeRenGui(CommandSender sender) {
+        titles = readgerendatabase((Player) sender);
         totalPages = (titles.size() + itemsPerPage - 1) / itemsPerPage;
         currentPage = 0;
 
-        gui = Bukkit.createInventory(null, 54, "称号商店");
+        gui = Bukkit.createInventory(null, 54, "个人称号");
 
         refillInventory((Player) sender);
 
@@ -42,7 +42,7 @@ public class ShopGui implements Listener {
         // 重新填充当前页的物品
         for (int i = currentPage * itemsPerPage; i < Math.min((currentPage + 1) * itemsPerPage, titles.size()); i++) {
             biyao.TitleData titleData = titles.get(i);
-            ItemStack titleItem = createShopTitleItem(titleData);
+            ItemStack titleItem = createGeRenTitleItem(titleData);
             gui.addItem(titleItem);
         }
 
