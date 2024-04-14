@@ -41,6 +41,7 @@ public class Sql implements sqlchoose{
                 createTableSQL_PlayerTitle += "prefix_enable boolean NOT NULL,";
                 createTableSQL_PlayerTitle += "suffix_enable boolean NOT NULL)";
                 statement.executeUpdate(createTableSQL_PlayerTitle);
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2SQL数据库加载成功!");
             } catch (SQLException e) {
                 Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
             }

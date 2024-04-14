@@ -22,7 +22,7 @@ import static ideamc.titleplugin.TitlePlugin.Sql;
 import static org.bukkit.Bukkit.getServer;
 
 public class playerJoinEvent implements Listener {
-    public void playerjoinevent(TitlePlugin plugin){
+    public playerJoinEvent(TitlePlugin plugin){
         getServer().getPluginManager().registerEvents(this, plugin);
     }
 

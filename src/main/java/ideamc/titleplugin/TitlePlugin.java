@@ -1,6 +1,8 @@
 package ideamc.titleplugin;
 
 import ideamc.titleplugin.Command.AdminCommand;
+import ideamc.titleplugin.Event.TitleSaleEndDateEvent;
+import ideamc.titleplugin.Event.playerJoinEvent;
 import ideamc.titleplugin.SQL.Sql;
 import ideamc.titleplugin.SQL.MySQL;
 import ideamc.titleplugin.SQL.sqlchoose;
@@ -12,6 +14,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
 import org.black_ixx.playerpoints.PlayerPoints;
+
+import static ideamc.titleplugin.Event.TitleSaleEndDateEvent.titlesaleendate;
 
 public class TitlePlugin extends JavaPlugin {
     private static FileConfiguration config;
@@ -44,6 +48,10 @@ public class TitlePlugin extends JavaPlugin {
         }else{
             Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置PlayerPoints未找到,点券购买功能无法使用!");
         }
+
+        new playerJoinEvent(this);
+        new TitleSaleEndDateEvent();
+        titlesaleendate();
 
     }
 
