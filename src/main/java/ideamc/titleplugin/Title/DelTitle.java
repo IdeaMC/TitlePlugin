@@ -33,4 +33,9 @@ public class DelTitle {
             sender.sendMessage("§4[TitlePlugin]从玩家" + playername + "移除称号ID" + title_id + "失败!");
         }
     }
+
+    public static boolean eventdelplayertitle(String player_uuid, int title_id){
+        String sql = "DELETE FROM PlayerTitle WHERE player_uuid = '" + player_uuid + "' AND title_id = " + title_id;
+        return Sql().eventquery(sql);
+    }
 }

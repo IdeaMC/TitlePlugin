@@ -79,14 +79,14 @@ public class MySQL implements sqlchoose{
             // 创建 Statement 对象
             statement = connection.createStatement();
         }catch (SQLException e){
-            sender.sendMessage("[TitlePlugin]§2" + e);;
+            sender.sendMessage("[TitlePlugin]§4" + e);;
         }
         if(statement != null && connection != null){
             try {
                 statement.executeUpdate(sql);
                 return true;
             }catch (SQLException e){
-                sender.sendMessage("[TitlePlugin]§2" + e);
+                sender.sendMessage("[TitlePlugin]§4" + e);
                 return false;
             }finally {
                 try {
@@ -99,7 +99,7 @@ public class MySQL implements sqlchoose{
                         connection = null;
                     }
                 } catch (SQLException e) {
-                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);;
+                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);;
                 }
             }
         }else{
@@ -115,13 +115,13 @@ public class MySQL implements sqlchoose{
             // 创建 Statement 对象
             statement = connection.createStatement();
         }catch (SQLException e){
-            sender.sendMessage("[TitlePlugin]§2" + e);;
+            sender.sendMessage("[TitlePlugin]§4" + e);;
         }
         if(statement != null && connection != null){
             try {
                 return statement.executeQuery(sql);
             }catch (SQLException e){
-                sender.sendMessage("[TitlePlugin]§2" + e);
+                sender.sendMessage("[TitlePlugin]§4" + e);
             }finally {
                 try {
                     if (statement != null) {
@@ -133,11 +133,79 @@ public class MySQL implements sqlchoose{
                         connection = null;
                     }
                 } catch (SQLException e) {
-                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);;
+                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
                 }
             }
         }
         return null;
     }
-
+    @Override
+    public boolean eventquery(String sql){
+        try {
+            String url = "jdbc:mysql://" + Host + ":" + Port + "/" + Database;
+            // 连接到数据库
+            connection = DriverManager.getConnection(url, Username, Password);
+            // 创建 Statement 对象
+            statement = connection.createStatement();
+        }catch (SQLException e){
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+        }
+        if(statement != null && connection != null){
+            try {
+                statement.executeUpdate(sql);
+                return true;
+            }catch (SQLException e){
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+                return false;
+            }finally {
+                try {
+                    if (statement != null) {
+                        statement.close();
+                        statement = null;
+                    }
+                    if (connection != null) {
+                        connection.close();
+                        connection = null;
+                    }
+                } catch (SQLException e) {
+                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+                }
+            }
+        }else{
+            return false;
+        }
+    }
+    @Override
+    public ResultSet readeventquery(String sql){
+        try {
+            String url = "jdbc:mysql://" + Host + ":" + Port + "/" + Database;
+            // 连接到数据库
+            connection = DriverManager.getConnection(url, Username, Password);
+            // 创建 Statement 对象
+            statement = connection.createStatement();
+        }catch (SQLException e){
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+        }
+        if(statement != null && connection != null){
+            try {
+                return statement.executeQuery(sql);
+            }catch (SQLException e){
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+            }finally {
+                try {
+                    if (statement != null) {
+                        statement.close();
+                        statement = null;
+                    }
+                    if (connection != null) {
+                        connection.close();
+                        connection = null;
+                    }
+                } catch (SQLException e) {
+                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+                }
+            }
+        }
+        return null;
+    }
 }

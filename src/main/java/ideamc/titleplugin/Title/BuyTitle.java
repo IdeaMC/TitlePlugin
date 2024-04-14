@@ -73,7 +73,7 @@ public class BuyTitle {
                             String sql1;
                             if(youxiao != 0){
                                 String date = addDaysToDate(getCurrentDate(),youxiao);
-                                 sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
+                                sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
                                 sql1 += " ('" + title_id + "', ";
                                 sql1 += stplayer_uuid + ", '";
                                 sql1 += date + "', ";

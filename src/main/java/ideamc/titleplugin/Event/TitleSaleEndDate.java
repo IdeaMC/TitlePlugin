@@ -1,4 +1,5 @@
 package ideamc.titleplugin.Event;
 
-public class PlayerJoinEvent {
+public class TitleSaleEndDate {
+
 }

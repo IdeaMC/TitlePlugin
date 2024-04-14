@@ -9,7 +9,6 @@ public class Sql implements sqlchoose{
     private static Connection connection = null;
     private static Statement statement = null;
     public static void LoadSQLite(){
-
         try {
             // 注册 SQLite 数据库驱动
             Class.forName("org.sqlite.JDBC");
@@ -43,11 +42,11 @@ public class Sql implements sqlchoose{
                 createTableSQL_PlayerTitle += "suffix_enable boolean NOT NULL)";
                 statement.executeUpdate(createTableSQL_PlayerTitle);
             } catch (SQLException e) {
-                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
             }
 
         } catch (ClassNotFoundException | SQLException e) {
-            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
         }finally {
             try {
                 if (statement != null) {
@@ -59,7 +58,7 @@ public class Sql implements sqlchoose{
                     connection = null;
                 }
             } catch (SQLException e) {
-                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);;
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);;
             }
         }
     }
@@ -71,14 +70,14 @@ public class Sql implements sqlchoose{
             // 创建 Statement 对象
             statement = connection.createStatement();
         }catch (SQLException e){
-            sender.sendMessage("[TitlePlugin]§2" + e);;
+            sender.sendMessage("[TitlePlugin]§4" + e);;
         }
         if(statement != null && connection != null){
             try {
                 statement.executeUpdate(sql);
                 return true;
             }catch (SQLException e){
-                sender.sendMessage("[TitlePlugin]§2" + e);
+                sender.sendMessage("[TitlePlugin]§4" + e);
                 return false;
             }finally {
                 try {
@@ -91,7 +90,7 @@ public class Sql implements sqlchoose{
                         connection = null;
                     }
                 } catch (SQLException e) {
-                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);;
+                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
                 }
             }
         }else{
@@ -106,13 +105,13 @@ public class Sql implements sqlchoose{
             // 创建 Statement 对象
             statement = connection.createStatement();
         }catch (SQLException e){
-            sender.sendMessage("[TitlePlugin]§2" + e);;
+            sender.sendMessage("[TitlePlugin]§4" + e);
         }
         if(statement != null && connection != null){
             try {
                 return statement.executeQuery(sql);
             }catch (SQLException e){
-                sender.sendMessage("[TitlePlugin]§2" + e);
+                sender.sendMessage("[TitlePlugin]§4" + e);
             }finally {
                 try {
                     if (statement != null) {
@@ -124,7 +123,74 @@ public class Sql implements sqlchoose{
                         connection = null;
                     }
                 } catch (SQLException e) {
-                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);;
+                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public boolean eventquery(String sql) {
+        try {
+            // 连接到数据库
+            connection = DriverManager.getConnection("jdbc:sqlite:./plugins/TitlePlugin/TitlePlugin.db");
+            // 创建 Statement 对象
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2" + e);;
+        }
+        if (statement != null && connection != null) {
+            try {
+                statement.executeUpdate(sql);
+                return true;
+            } catch (SQLException e) {
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);;
+                return false;
+            } finally {
+                try {
+                    if (statement != null) {
+                        statement.close();
+                        statement = null;
+                    }
+                    if (connection != null) {
+                        connection.close();
+                        connection = null;
+                    }
+                } catch (SQLException e) {
+                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+    @Override
+    public ResultSet readeventquery(String sql){
+        try {
+            // 连接到数据库
+            connection = DriverManager.getConnection("jdbc:sqlite:./plugins/TitlePlugin/TitlePlugin.db");
+            // 创建 Statement 对象
+            statement = connection.createStatement();
+        }catch (SQLException e){
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+        }
+        if(statement != null && connection != null){
+            try {
+                return statement.executeQuery(sql);
+            }catch (SQLException e){
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+            }finally {
+                try {
+                    if (statement != null) {
+                        statement.close();
+                        statement = null;
+                    }
+                    if (connection != null) {
+                        connection.close();
+                        connection = null;
+                    }
+                } catch (SQLException e) {
+                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
                 }
             }
         }
