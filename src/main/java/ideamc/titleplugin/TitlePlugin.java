@@ -37,7 +37,6 @@ public class TitlePlugin extends JavaPlugin {
 
         new AdminCommand(this);
         new PlayerCommand(this);
-        new AdminCommand(this);
 
         //挂钩vault
         if (!setupEconomy() ) {

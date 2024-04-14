@@ -13,7 +13,7 @@ import static ideamc.titleplugin.Vault.Point.removeplayerpoint;
 import static ideamc.titleplugin.Vault.coin.removecoin;
 
 public class BuyTitle {
-    public void buycoin(CommandSender sender, int title_id){
+    public static void buycoin(CommandSender sender, int title_id){
         String sql = "SELECT * FROM Title WHERE title_id = " + title_id;
         ResultSet resultSet = Sql().readquery(sql, sender);
         if (resultSet != null) {
@@ -38,15 +38,15 @@ public class BuyTitle {
                             }else{
                                 sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
                                 sql1 += " ('" + title_id + "', ";
-                                sql1 += stplayer_uuid + ", '";
-                                sql1 += "0', ";
+                                sql1 += stplayer_uuid + ", ";
+                                sql1 += "NULL, ";
                                 sql1 += "false, ";
                                 sql1 += "false)";
                             }
                             if(Sql().query(sql1,sender)){
-                                sender.sendMessage("§2[TitlePlugin]购买成功!");
+                                sender.sendMessage("§2[TitlePlugin]称号ID" + title_id + "成功!");
                             }else{
-                                sender.sendMessage("§4[TitlePlugin]购买失败!");
+                                sender.sendMessage("§4[TitlePlugin]称号ID" + title_id + "失败!");
                             }
                         }
                     }
@@ -57,7 +57,7 @@ public class BuyTitle {
         }
     }
 
-    public void buypoint(CommandSender sender, int title_id){
+    public static void buypoint(CommandSender sender, int title_id){
         String sql = "SELECT * FROM Title WHERE title_id = " + title_id;
         ResultSet resultSet = Sql().readquery(sql, sender);
         if (resultSet != null) {
@@ -82,8 +82,8 @@ public class BuyTitle {
                             }else{
                                 sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
                                 sql1 += " ('" + title_id + "', ";
-                                sql1 += stplayer_uuid + ", '";
-                                sql1 += "0', ";
+                                sql1 += stplayer_uuid + ", ";
+                                sql1 += "NULL, ";
                                 sql1 += "false, ";
                                 sql1 += "false)";
                             }

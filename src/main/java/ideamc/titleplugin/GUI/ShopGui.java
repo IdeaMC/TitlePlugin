@@ -11,10 +11,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 import static ideamc.titleplugin.GUI.biyao.readshopdatabase;
 import static ideamc.titleplugin.GUI.biyao.createShopTitleItem;
+import static ideamc.titleplugin.Title.BuyTitle.buycoin;
+import static ideamc.titleplugin.Title.BuyTitle.buypoint;
+import static ideamc.titleplugin.TitlePlugin.Sql;
 
 public class ShopGui implements Listener {
     private static final int itemsPerPage = 45; // 每页45个物品
@@ -79,6 +83,26 @@ public class ShopGui implements Listener {
 
         if (clickedInventory != null && clickedInventory.equals(gui)) {
             event.setCancelled(true); // 防止玩家直接拿取物品
+
+            if(clickedInventory.contains(Material.NAME_TAG)){
+                String stitle_id = clickedInventory.getName();
+                int title_id = Integer.parseInt(stitle_id);
+                String sql = "SELECT type FROM Title WHERE title_id = " + title_id;
+                ResultSet rs = Sql().readquery(sql, player);
+                if(rs != null){
+                    try {
+                        while (rs.next()){
+                            String type = rs.getString("type");
+                            if(type.equals("coin")){
+                                buycoin(player, title_id);
+                            }else if(type.equals("points")){
+                                buypoint(player, title_id);
+                            }
+                        }
+                    }catch (Exception ignored){
+                    }
+                }
+            }
 
             int slot = event.getRawSlot();
 

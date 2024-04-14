@@ -145,11 +145,11 @@ public class biyao {
         ItemStack item = new ItemStack(Material.NAME_TAG);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(titleData.getTitleName());
+        meta.setDisplayName(String.valueOf(titleData.getTitleId()));
 
         List<String> lore = new ArrayList<>();
 
-        lore.add("称号ID:" + titleData.getTitleId());
+        lore.add("称号名:" + titleData.getTitleName());
         lore.add("描述:" + titleData.getDescription());
         if(titleData.getExpirationDate() != null){
             lore.add("有效期至:" + titleData.getExpirationDate());
