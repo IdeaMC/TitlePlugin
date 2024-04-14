@@ -26,26 +26,34 @@ public class BuyTitle {
                         int vault = resultSet.getInt("vault");
                         if(removecoin(player_name,vault)){
                             int youxiao = resultSet.getInt("youxiao");
+                            String sql1;
                             if(youxiao != 0){
                                 String date = addDaysToDate(getCurrentDate(),youxiao);
-                                String sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
-                                sql += " ('" + title_id + "', ";
-                                sql += stplayer_uuid + ", '";
-                                sql += date + "', ";
-                                sql += "false, ";
-                                sql += "false)";
+                                sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
+                                sql1 += " ('" + title_id + "', ";
+                                sql1 += stplayer_uuid + ", '";
+                                sql1 += date + "', ";
+                                sql1 += "false, ";
+                                sql1 += "false)";
                             }else{
-                                String sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
-                                sql += " ('" + title_id + "', ";
-                                sql += stplayer_uuid + ", '";
-                                sql += "0', ";
-                                sql += "false, ";
-                                sql += "false)";
+                                sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
+                                sql1 += " ('" + title_id + "', ";
+                                sql1 += stplayer_uuid + ", '";
+                                sql1 += "0', ";
+                                sql1 += "false, ";
+                                sql1 += "false)";
+                            }
+                            if(Sql().query(sql1,sender)){
+                                sender.sendMessage("§2[TitlePlugin]购买成功!");
+                            }else{
+                                sender.sendMessage("§4[TitlePlugin]购买失败!");
                             }
                         }
                     }
                 }
             }catch (Exception ignored){}
+        }else{
+            sender.sendMessage("§4[TitlePlugin]输入的称号ID有误!");
         }
     }
 
@@ -62,26 +70,34 @@ public class BuyTitle {
                         int playerpoints = resultSet.getInt("playerpoints");
                         if(removeplayerpoint(player_name,playerpoints)){
                             int youxiao = resultSet.getInt("youxiao");
+                            String sql1;
                             if(youxiao != 0){
                                 String date = addDaysToDate(getCurrentDate(),youxiao);
-                                String sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
-                                sql += " ('" + title_id + "', ";
-                                sql += stplayer_uuid + ", '";
-                                sql += date + "', ";
-                                sql += "false, ";
-                                sql += "false)";
+                                 sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
+                                sql1 += " ('" + title_id + "', ";
+                                sql1 += stplayer_uuid + ", '";
+                                sql1 += date + "', ";
+                                sql1 += "false, ";
+                                sql1 += "false)";
                             }else{
-                                String sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
-                                sql += " ('" + title_id + "', ";
-                                sql += stplayer_uuid + ", '";
-                                sql += "0', ";
-                                sql += "false, ";
-                                sql += "false)";
+                                sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
+                                sql1 += " ('" + title_id + "', ";
+                                sql1 += stplayer_uuid + ", '";
+                                sql1 += "0', ";
+                                sql1 += "false, ";
+                                sql1 += "false)";
+                            }
+                            if(Sql().query(sql1,sender)){
+                                sender.sendMessage("§2[TitlePlugin]购买成功!");
+                            }else{
+                                sender.sendMessage("§4[TitlePlugin]购买失败!");
                             }
                         }
                     }
                 }
             }catch (Exception ignored){}
+        }else{
+            sender.sendMessage("§4[TitlePlugin]输入的称号ID有误!");
         }
     }
 }

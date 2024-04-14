@@ -24,6 +24,10 @@ public class ColorA {
         int steps = content.length();
         StringBuilder title = new StringBuilder();
 
+        if(startTagPos != 0){
+            title.append(args, 0, startTagPos);
+        }
+
         for (int i = 0; i < steps; i++) {
             float ratio = (float) i / (float) steps;
             Color color = interpolateColor(colorStart, colorEnd, ratio);
@@ -34,6 +38,11 @@ public class ColorA {
             }
             title.append(content.charAt(i));
         }
+
+        if(endTagPos+8 != args.length()){
+            title.append(args, endTagPos+8, args.length());
+        }
+
         return title.toString();
     }
 

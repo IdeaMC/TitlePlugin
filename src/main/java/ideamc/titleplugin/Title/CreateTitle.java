@@ -1,7 +1,12 @@
 package ideamc.titleplugin.Title;
 
+import static ideamc.titleplugin.ColorA.ColorB;
 import static ideamc.titleplugin.TitlePlugin.Sql;
 import org.bukkit.command.CommandSender;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Objects;
 
 
 // /ps create [type] [title名称] [coin/playerpoints/permission]
@@ -9,11 +14,15 @@ public class CreateTitle {
     //活动title的创建
     public void create(CommandSender sender, String type, String titleName, String description){
         String sql = null;
+        String Ctitlename = titleName;
+        if(titleName.contains("&#")){
+            Ctitlename = ColorB(titleName);
+        }
         if(type.equalsIgnoreCase("activity")){
             sql = "INSERT INTO Title (type,title_name,description,canbuy,vault,playerpoints,youxiao) ";
             sql += "VALUES ";
             sql += "('activity',";
-            sql += "'" + titleName + "',";
+            sql += "'" + Ctitlename + "',";
             sql += "'" + description + "',";
             sql += "false,";
             sql += "0,";
@@ -21,7 +30,16 @@ public class CreateTitle {
             sql += "0)";
         }
         if(Sql().query(sql,sender)){
-            sender.sendMessage("§2[TitlePlugin]创建成功!");
+            String sql1 = "SELECT title_id FROM Title";
+            sql1 += " WHERE title_name = " + Ctitlename;
+            ResultSet resultSet = Sql().readquery(sql1,sender);
+            try {
+                if (Objects.requireNonNull(resultSet).next()) {
+                    int title_id = resultSet.getInt("title_id");
+                    sender.sendMessage("§2[TitlePlugin]创建成功!称号ID为" + title_id);
+                }
+            } catch (SQLException ignored) {
+            }
         }else{
             sender.sendMessage("§4l[TitlePlugin]创建失败!");
         }
@@ -29,27 +47,42 @@ public class CreateTitle {
     //点券or金币title的创建
     public void create(CommandSender sender, String type, String titleName, String description, int vault){
         String sql =null;
+        String Ctitlename = titleName;
+        if(titleName.contains("&#")){
+            Ctitlename = ColorB(titleName);
+        }
         if(type.equalsIgnoreCase("coin")){
-            sql = "INSERT INTO Title (type,title_name,description,vault,canbuy,playerpoints) ";
+            sql = "INSERT INTO Title (type,title_name,description,vault,canbuy,playerpoints,youxiao) ";
             sql += "VALUES ";
             sql += "('coin',";
             sql += "'" + titleName + "',";
             sql += "'" + description + "',";
             sql += vault + ",";
             sql += "true,";
+            sql += "0,";
             sql += "0)";
         } else if(type.equalsIgnoreCase("points")){
-            sql = "INSERT INTO Title (type,title_name,description,playerpoints,canbuy,vault) ";
+            sql = "INSERT INTO Title (type,title_name,description,playerpoints,canbuy,vault,youxiao) ";
             sql += "VALUES ";
             sql += "('points',";
             sql += "'" + titleName + "',";
             sql += "'" + description + "',";
             sql += vault + ",";
             sql += "true,";
+            sql += "0,";
             sql += "0)";
         }
         if(Sql().query(sql,sender)){
-            sender.sendMessage("§2[TitlePlugin]创建成功!");
+            String sql1 = "SELECT title_id FROM Title";
+            sql1 += " WHERE title_name = " + Ctitlename;
+            ResultSet resultSet = Sql().readquery(sql1,sender);
+            try {
+                if (Objects.requireNonNull(resultSet).next()) {
+                    int title_id = resultSet.getInt("title_id");
+                    sender.sendMessage("§2[TitlePlugin]创建成功!称号ID为" + title_id);
+                }
+            } catch (SQLException ignored) {
+            }
         }else{
             sender.sendMessage("§4[TitlePlugin]创建失败!");
         }
@@ -57,8 +90,12 @@ public class CreateTitle {
     //权限title的创建
     public void create(CommandSender sender, String type, String titleName, String descripition, String permission){
         String sql =null;
+        String Ctitlename = titleName;
+        if(titleName.contains("&#")){
+            Ctitlename = ColorB(titleName);
+        }
         if(type.equalsIgnoreCase("permission")){
-            sql = "INSERT INTO Title (type,title_name,description,permission,canbuy,vault,playerpoints) ";
+            sql = "INSERT INTO Title (type,title_name,description,permission,canbuy,vault,playerpoints,youxiao) ";
             sql += "VALUES ";
             sql += "('permission',";
             sql += "'" + titleName + "',";
@@ -66,10 +103,20 @@ public class CreateTitle {
             sql += "'" + permission + "',";
             sql += "false,";
             sql += "0,";
+            sql += "0,";
             sql += "0)";
         }
         if(Sql().query(sql,sender)){
-            sender.sendMessage("§2[TitlePlugin]创建成功!");
+            String sql1 = "SELECT title_id FROM Title";
+            sql1 += " WHERE title_name = " + Ctitlename;
+            ResultSet resultSet = Sql().readquery(sql1,sender);
+            try {
+                if (Objects.requireNonNull(resultSet).next()) {
+                    int title_id = resultSet.getInt("title_id");
+                    sender.sendMessage("§2[TitlePlugin]创建成功!称号ID为" + title_id);
+                }
+            } catch (SQLException ignored) {
+            }
         }else{
             sender.sendMessage("§4[TitlePlugin]创建失败!");
         }
