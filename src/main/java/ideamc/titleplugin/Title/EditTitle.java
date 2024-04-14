@@ -58,6 +58,16 @@ public class EditTitle {
             }else{
                 sender.sendMessage("§4[TitlePlugin]修改失败!");
             }
+        }else if(changetype.equalsIgnoreCase("setjiezhi")){
+            String sql = "UPDATE Title ";
+            sql += "SET sale_end_date = NULL";
+            sql += " WHERE title_id = " + title_id;
+            if(Sql().query(sql,sender)){
+                sender.sendMessage("§2[TitlePlugin]修改成功!");
+                sender.sendMessage("§2[TitlePlugin]称号ID" + title_id + "截止日期已删除!");
+            }else{
+                sender.sendMessage("§4[TitlePlugin]修改失败!");
+            }
         }
     }
     //硬币和点券和购买有效期和购买截止日期的修改
