@@ -22,7 +22,7 @@ public class Sql implements sqlchoose{
             try {
                 // 如果数据表不存在，则创建数据表
                 String createTableSQL_Title = "CREATE TABLE IF NOT EXISTS Title ";
-                createTableSQL_Title += "(title_id INT AUTO_INCREMENT PRIMARY KEY,";
+                createTableSQL_Title += "(title_id INTEGER PRIMARY KEY,";
                 createTableSQL_Title += "title_name TEXT NOT NULL,";
                 createTableSQL_Title += "type TEXT NOT NULL,";
                 createTableSQL_Title += "description TEXT,";

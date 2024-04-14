@@ -32,7 +32,7 @@ public class CreateTitle {
         }
         if(Sql().query(sql,sender)){
             String sql1 = "SELECT title_id FROM Title";
-            sql1 += " WHERE title_name = " + Ctitlename;
+            sql1 += " WHERE title_name = '" + Ctitlename + "'";
             ResultSet resultSet = Sql().readquery(sql1,sender);
             try {
                 if (Objects.requireNonNull(resultSet).next()) {
@@ -77,7 +77,7 @@ public class CreateTitle {
         }
         if(Sql().query(sql,sender)){
             String sql1 = "SELECT title_id FROM Title";
-            sql1 += " WHERE title_name = " + Ctitlename;
+            sql1 += " WHERE title_name = '" + Ctitlename + "'";
             ResultSet resultSet = Sql().readquery(sql1,sender);
             try {
                 if (Objects.requireNonNull(resultSet).next()) {
@@ -112,7 +112,7 @@ public class CreateTitle {
         }
         if(Sql().query(sql,sender)){
             String sql1 = "SELECT title_id FROM Title";
-            sql1 += " WHERE title_name = " + Ctitlename;
+            sql1 += " WHERE title_name = '" + Ctitlename + "'";
             ResultSet resultSet = Sql().readquery(sql1,sender);
             try {
                 if (Objects.requireNonNull(resultSet).next()) {
