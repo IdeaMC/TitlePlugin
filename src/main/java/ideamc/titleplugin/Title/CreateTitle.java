@@ -19,7 +19,7 @@ public class CreateTitle {
             Ctitlename = ColorB(titleName);
         }
         if(type.equalsIgnoreCase("activity")){
-            sql = "INSERT INTO Title (type,title_name,description,canbuy,vault,playerpoints,youxiao) ";
+            sql = "INSERT INTO Title (type,title_name,description,canbuy,vault,playerpoints,youxiao,sale_end_date) ";
             sql += "VALUES ";
             sql += "('activity',";
             sql += "'" + Ctitlename + "',";
@@ -27,7 +27,8 @@ public class CreateTitle {
             sql += "false,";
             sql += "0,";
             sql += "0,";
-            sql += "0)";
+            sql += "0,";
+            sql += "NULL)";
         }
         if(Sql().query(sql,sender)){
             String sql1 = "SELECT title_id FROM Title";
@@ -52,7 +53,7 @@ public class CreateTitle {
             Ctitlename = ColorB(titleName);
         }
         if(type.equalsIgnoreCase("coin")){
-            sql = "INSERT INTO Title (type,title_name,description,vault,canbuy,playerpoints,youxiao) ";
+            sql = "INSERT INTO Title (type,title_name,description,vault,canbuy,playerpoints,youxiao,sale_end_date) ";
             sql += "VALUES ";
             sql += "('coin',";
             sql += "'" + titleName + "',";
@@ -60,9 +61,10 @@ public class CreateTitle {
             sql += vault + ",";
             sql += "true,";
             sql += "0,";
-            sql += "0)";
+            sql += "0,";
+            sql += "NULL)";
         } else if(type.equalsIgnoreCase("points")){
-            sql = "INSERT INTO Title (type,title_name,description,playerpoints,canbuy,vault,youxiao) ";
+            sql = "INSERT INTO Title (type,title_name,description,playerpoints,canbuy,vault,youxiao,sale_end_date) ";
             sql += "VALUES ";
             sql += "('points',";
             sql += "'" + titleName + "',";
@@ -70,7 +72,8 @@ public class CreateTitle {
             sql += vault + ",";
             sql += "true,";
             sql += "0,";
-            sql += "0)";
+            sql += "0,";
+            sql += "NULL)";
         }
         if(Sql().query(sql,sender)){
             String sql1 = "SELECT title_id FROM Title";
@@ -95,7 +98,7 @@ public class CreateTitle {
             Ctitlename = ColorB(titleName);
         }
         if(type.equalsIgnoreCase("permission")){
-            sql = "INSERT INTO Title (type,title_name,description,permission,canbuy,vault,playerpoints,youxiao) ";
+            sql = "INSERT INTO Title (type,title_name,description,permission,canbuy,vault,playerpoints,youxiao,sale_end_date) ";
             sql += "VALUES ";
             sql += "('permission',";
             sql += "'" + titleName + "',";
@@ -104,7 +107,8 @@ public class CreateTitle {
             sql += "false,";
             sql += "0,";
             sql += "0,";
-            sql += "0)";
+            sql += "0,";
+            sql += "NULL)";
         }
         if(Sql().query(sql,sender)){
             String sql1 = "SELECT title_id FROM Title";
