@@ -40,9 +40,9 @@ public class PlayerCommand implements CommandExecutor{
     }
 
     private final String[] playerhelp = {
-            "===TitlePlugin===",
-            "/tip shop ---打开称号商店",
-            "/tip ui ---打开个人称号仓库"
+            "§6=======TitlePlugin=======",
+            "§3/tip shop ---打开称号商店",
+            "§3/tip ui ---打开个人称号仓库"
     };
 
 }

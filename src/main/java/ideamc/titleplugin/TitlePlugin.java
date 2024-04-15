@@ -5,6 +5,8 @@ import ideamc.titleplugin.Command.PlayerCommand;
 import ideamc.titleplugin.Command.TabCommand;
 import ideamc.titleplugin.Event.TitleSaleEndDateEvent;
 import ideamc.titleplugin.Event.playerJoinEvent;
+import ideamc.titleplugin.GUI.GeRenGui;
+import ideamc.titleplugin.GUI.ShopGui;
 import ideamc.titleplugin.SQL.Sql;
 import ideamc.titleplugin.SQL.MySQL;
 import ideamc.titleplugin.SQL.sqlchoose;
@@ -61,6 +63,8 @@ public class TitlePlugin extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置PlaceholderAPI未找到,变量功能无法使用!");
         }
 
+        new ShopGui(this);
+        new GeRenGui(this);
         new playerJoinEvent(this);
         new TitleSaleEndDateEvent();
         titlesaleendate();

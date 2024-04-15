@@ -10,5 +10,6 @@ public interface sqlchoose {
     boolean query(String sql, CommandSender sender);
     boolean eventquery(String sql);
     List<biyao.TitleData> readquery(String sql, CommandSender sender, String table_name);
+    boolean readquery (String sql, CommandSender sender, int a);
     List<biyao.TitleData> readeventquery(String sql, String table_name);
 }

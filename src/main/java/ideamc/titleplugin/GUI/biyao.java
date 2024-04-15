@@ -17,40 +17,32 @@ public class biyao {
         List<TitleData> titles = new ArrayList<>();
 
         String sql = "SELECT * FROM Title";
-        ResultSet rs = Sql().readeventquery(sql);
+        List<TitleData> rs = Sql().readeventquery(sql, "title");
 
         String sql1 = "SELECT title_id FROM PlayerTitle WHERE player_uuid = '" + player.getUniqueId().toString() + "'";
-        ResultSet rs1 = Sql().readeventquery(sql1);
+        List<TitleData> rs1 = Sql().readeventquery(sql1, "playertitle");
         Set<Integer> playerhvae = new HashSet<>();
         if(rs1 != null){
-            try {
-                while (rs1.next()) {
-                    playerhvae.add(rs1.getInt("title_id"));
-                }
-            }catch (Exception e){
-                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4商店读取个人数据库错误");
+            for(TitleData t : rs1){
+                playerhvae.add(t.getTitleId());
             }
         }
         if(rs != null){
-            try{
-                while (rs.next()) {
-                    if(!playerhvae.contains(rs.getInt("title_id"))){
-                        int titleId = rs.getInt("title_id");
-                        String titleName = rs.getString("title_name");
-                        String type = rs.getString("type");
-                        String description = rs.getString("description");
-                        int coin = rs.getInt("vault");
-                        int point = rs.getInt("playerpoints");
-                        boolean canBuy = rs.getBoolean("canbuy");
-                        String permission = rs.getString("permission");
-                        int youxiao = rs.getInt("youxiao");
-                        String saleEndDate = rs.getString("sale_end_date");
+            for(TitleData t : rs){
+                if(!playerhvae.contains(t.getTitleId())){
+                    int titleId = t.getTitleId();
+                    String titleName = t.getTitleName();
+                    String type = t.getType();
+                    String description = t.getDescription();
+                    int coin = t.getCoin();
+                    int point = t.getPoints();
+                    boolean canBuy = t.isCanBuy();
+                    String permission = t.getPermission();
+                    int youxiao = t.getYouxiao();
+                    String saleEndDate = t.getSaleEndDate();
 
-                        titles.add(new TitleData(titleId, titleName, type, description, coin, point, canBuy, permission, youxiao, saleEndDate, null, false, false));
-                    }
+                    titles.add(new TitleData(titleId, titleName, type, description, coin, point, canBuy, permission, youxiao, saleEndDate, null, null, false, false));
                 }
-            }catch (Exception e){
-                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4商店读取数据库错误!" + e.getMessage());
             }
         }else{
             player.sendMessage("§4[TitlePlugin]商店中没有称号!");
@@ -68,6 +60,7 @@ public class biyao {
         List<String> lore = new ArrayList<>();
 
         if(titleData.getType().equalsIgnoreCase("coin")){
+            lore.add("称号:" + titleData.getTitleName());
             lore.add("描述:" + titleData.getDescription());
             lore.add("价格:" + titleData.getCoin() + "金币");
             if(titleData.getYouxiao() != 0){
@@ -79,6 +72,7 @@ public class biyao {
             lore.add("能否购买:" + (titleData.isCanBuy() ? "能" : "不能"));
             lore.add("点击左键以购买");
         }else if(titleData.getType().equalsIgnoreCase("points")){
+            lore.add("称号:" + titleData.getTitleName());
             lore.add("描述:" + titleData.getDescription());
             lore.add("价格:" + titleData.getCoin() + "点券");
             if(titleData.getYouxiao() != 0){
@@ -90,10 +84,12 @@ public class biyao {
             lore.add("能否购买:" + (titleData.isCanBuy() ? "能" : "不能"));
             lore.add("点击左键以购买");
         }else if(titleData.getType().equalsIgnoreCase("activity")){
+            lore.add("称号:" + titleData.getTitleName());
             lore.add("描述:" + titleData.getDescription());
             lore.add("限时活动获取");
             lore.add("不能购买");
         }else if(titleData.getType().equalsIgnoreCase("permission")){
+            lore.add("称号:" + titleData.getTitleName());
             lore.add("描述:" + titleData.getDescription());
             lore.add("所需权限:" + titleData.getPermission());
             lore.add("不能购买");
@@ -113,39 +109,32 @@ public class biyao {
         List<TitleData> titles = new ArrayList<>();
 
         String sql = "SELECT * FROM PlayerTitle WHERE player_uuid = " + "'" + stplayer_uuid + "'";
-        ResultSet rs = Sql().readeventquery(sql);
+        List<TitleData> rs = Sql().readeventquery(sql, "playertitle");
         if(rs != null){
-            try{
-                while (rs.next()) {
-                    int title_id = rs.getInt("title_id");
-                    String sql1 = "SELECT * FROM Title WHERE title_id = '" + title_id + "'";
-                    ResultSet rs1 = Sql().readeventquery(sql1);
-                    if(rs1 != null){
-                        try{
-                            while (rs1.next()){
-                                int titleId = rs1.getInt("title_id");
-                                String titleName = rs1.getString("title_name");
-                                String type = rs1.getString("type");
-                                String description = rs1.getString("description");
-                                int coin = rs1.getInt("vault");
-                                int point = rs1.getInt("playerpoints");
-                                boolean canBuy = rs1.getBoolean("canbuy");
-                                String permission = rs1.getString("permission");
-                                int youxiao = rs1.getInt("youxiao");
-                                String saleEndDate = rs1.getString("sale_end_date");
-                                String expireDate = rs.getString("expire_date");
-                                boolean prefixEnable = rs.getBoolean("prefix_enable");
-                                boolean suffixEnable = rs.getBoolean("suffix_enable");
+            for(TitleData t : rs){
+                int title_id = t.getTitleId();
+                String sql1 = "SELECT * FROM Title WHERE title_id = '" + title_id + "'";
+                List<TitleData> rs1 = Sql().readeventquery(sql1, "title");
+                if(rs1 != null){
+                    for(TitleData t1 : rs1){
+                        int titleId = t1.getTitleId();
+                        String titleName = t1.getTitleName();
+                        String type = t1.getType();
+                        String description = t1.getDescription();
+                        int coin = t1.getCoin();
+                        int point = t1.getPoints();
+                        boolean canBuy = t1.isCanBuy();
+                        String permission = t1.getPermission();
+                        int youxiao = t1.getYouxiao();
+                        String saleEndDate = t1.getSaleEndDate();
+                        String playerUUID = t.getPlayerUUID();
+                        String expireDate = t.getExpirationDate();
+                        boolean prefixEnable = t.isPrefixEnable();
+                        boolean suffixEnable = t.isSuffixEnable();
 
-                                titles.add(new TitleData(titleId, titleName, type, description, coin, point, canBuy, permission, youxiao, saleEndDate, expireDate, prefixEnable, suffixEnable));
-                            }
-                        }catch (Exception e){
-                            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4个人仓库读取数据库错误2!");
-                        }
+                        titles.add(new TitleData(titleId, titleName, type, description, coin, point, canBuy, permission, youxiao, saleEndDate, playerUUID, expireDate, prefixEnable, suffixEnable));
                     }
                 }
-            }catch (Exception e){
-                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4个人仓库读取数据库错误1!");
             }
         }
 

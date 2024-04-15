@@ -37,6 +37,7 @@ public class CreateTitle {
         if(Sql().query(sql,sender)){
             String sql1 = "SELECT title_id FROM Title";
             sql1 += " WHERE title_name = '" + Ctitlename + "'";
+            sender.sendMessage(sql1);
             List<biyao.TitleData> resultSet = Sql().readquery(sql1,sender,"title");
             if (resultSet != null){
                 for(biyao.TitleData t1 : resultSet){
@@ -61,7 +62,7 @@ public class CreateTitle {
             sql = "INSERT INTO Title (type,title_name,description,vault,canbuy,playerpoints,youxiao,sale_end_date) ";
             sql += "VALUES ";
             sql += "('coin',";
-            sql += "'" + titleName + "',";
+            sql += "'" + Ctitlename + "',";
             sql += "'" + description + "',";
             sql += vault + ",";
             sql += "true,";
@@ -72,7 +73,7 @@ public class CreateTitle {
             sql = "INSERT INTO Title (type,title_name,description,playerpoints,canbuy,vault,youxiao,sale_end_date) ";
             sql += "VALUES ";
             sql += "('points',";
-            sql += "'" + titleName + "',";
+            sql += "'" + Ctitlename + "',";
             sql += "'" + description + "',";
             sql += vault + ",";
             sql += "true,";
@@ -107,7 +108,7 @@ public class CreateTitle {
             sql = "INSERT INTO Title (type,title_name,description,permission,canbuy,vault,playerpoints,youxiao,sale_end_date) ";
             sql += "VALUES ";
             sql += "('permission',";
-            sql += "'" + titleName + "',";
+            sql += "'" + Ctitlename + "',";
             sql += "'" + descripition + "',";
             sql += "'" + permission + "',";
             sql += "false,";

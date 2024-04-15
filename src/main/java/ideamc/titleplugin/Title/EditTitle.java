@@ -23,18 +23,11 @@ public class EditTitle {
             if(Sql().query(sql,sender)){
                 String sql1 = "SELECT COUNT(*) FROM PlayerTitle";
                 sql1 += " WHERE title_id = " + title_id;
-                List<biyao.TitleData> resultSet = Sql().readquery(sql1,sender,"playertitle");
-                try {
-                    if (Objects.requireNonNull(resultSet).next()) {
-                        int count = resultSet.getInt(1);
-                        if (count > 0) {
-                            String sql2 = "DELETE FROM PlayerTitle";
-                            sql2 += " WHERE title_id = " + title_id;
-                            Sql().query(sql2,sender);
-                        }
-                    }
-                } catch (SQLException e) {
-                    sender.sendMessage("§4[TitlePlugin]修改称号权限成功!但删除玩家称号错误!");
+                boolean resultSet = Sql().readquery(sql1,sender,1);
+                if (resultSet) {
+                        String sql2 = "DELETE FROM PlayerTitle";
+                        sql2 += " WHERE title_id = " + title_id;
+                        Sql().query(sql2,sender);
                 }
                 sender.sendMessage("§2[TitlePlugin]修改成功!");
                 sender.sendMessage("§2[TitlePlugin]称号ID" + title_id + "所需权限修改为" + a);

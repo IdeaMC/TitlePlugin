@@ -1,5 +1,6 @@
 package ideamc.titleplugin.GUI;
 
+import ideamc.titleplugin.TitlePlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -11,7 +12,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 import static ideamc.titleplugin.GUI.biyao.readshopdatabase;
@@ -26,6 +26,10 @@ public class ShopGui implements Listener {
     private static int currentPage;
     private static Inventory gui;
     private static List<biyao.TitleData> titles;
+
+    public ShopGui(TitlePlugin plugin){
+        Bukkit.getPluginManager().registerEvents(this, plugin);
+    }
     public static void showShopGui(CommandSender sender) {
         titles = readshopdatabase((Player) sender);
         totalPages = (titles.size() + itemsPerPage - 1) / itemsPerPage;
@@ -85,22 +89,19 @@ public class ShopGui implements Listener {
             event.setCancelled(true); // 防止玩家直接拿取物品
 
             if(clickedInventory.contains(Material.NAME_TAG)){
-                String stitle_id = clickedInventory.getName();
+                String stitle_id = clickedInventory.getItem(event.getSlot()).getItemMeta().getDisplayName();
                 int title_id = Integer.parseInt(stitle_id);
-                String sql = "SELECT type FROM Title WHERE title_id = " + title_id;
-                ResultSet rs = Sql().readquery(sql, player);
+                String sql = "SELECT type FROM Title WHERE title_id = '" + title_id + "'";
+                List<biyao.TitleData> rs = Sql().readquery(sql, player, "title");
                 if(rs != null){
-                    try {
-                        while (rs.next()){
-                            String type = rs.getString("type");
-                            if(type.equals("coin")){
-                                buycoin(player, title_id);
-                            }else if(type.equals("points")){
-                                buypoint(player, title_id);
-                            }
+                    for(biyao.TitleData t : rs){
+                        String type = t.getType();
+                        if(type.equals("coin")){
+                            buycoin(player, title_id);
+                        }else if(type.equals("points")){
+                            buypoint(player, title_id);
                         }
-                    }catch (Exception e){
-                        Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4商店购买错误!");                    }
+                    }
                 }
             }
 

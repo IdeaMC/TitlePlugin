@@ -18,9 +18,11 @@ public class TabCommand implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String a, String[] args) {
 
         if (command.getName().equalsIgnoreCase("tip") && args.length == 1) {
-            return Collections.singletonList(playertabCommands.toString());
+            return playertabCommands;
         }else if(command.getName().equalsIgnoreCase("atip") && args.length == 1){
-            return Collections.singletonList(admintabCommands.toString());
+            return admintabCommands;
+        }else if(command.getName().equalsIgnoreCase("atip") && args.length == 2 && args[0].equalsIgnoreCase("create")){
+            return admincreateCommands;
         }
         return null;
     }
@@ -41,5 +43,11 @@ public class TabCommand implements TabCompleter {
             "setjiezhi",
             "add",
             "del"
+    );
+    private final List<String> admincreateCommands = Arrays.asList(
+            "activity",
+            "permission",
+            "coin",
+            "points"
     );
 }

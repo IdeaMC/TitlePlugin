@@ -1,5 +1,6 @@
 package ideamc.titleplugin.GUI;
 
+import ideamc.titleplugin.TitlePlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -25,6 +26,10 @@ public class GeRenGui implements Listener {
     private static int currentPage;
     private static Inventory gui;
     private static List<biyao.TitleData> titles;
+
+    public GeRenGui(TitlePlugin plugin) {
+        Bukkit.getPluginManager().registerEvents(this, plugin);
+    }
 
     public static void showGeRenGui(CommandSender sender) {
         titles = readgerendatabase((Player) sender);
@@ -88,72 +93,65 @@ public class GeRenGui implements Listener {
 
             if (clickedInventory.contains(Material.NAME_TAG)) {
 
-                String stitle_id = clickedInventory.getName();
+                String stitle_id = clickedInventory.getItem(event.getSlot()).getItemMeta().getDisplayName();
                 int title_id = Integer.parseInt(stitle_id);
 
                 if (event.getAction().toString().contains("LEFT")) {
-                    String sql = "SELECT prefix_enable FROM PlayerTitle WHERE player_uuid = '" + stplayer_uuid + "' AND title_id = " + title_id;
-                    ResultSet rs = Sql().readquery(sql, player);
+                    String sql = "SELECT prefix_enable FROM PlayerTitle WHERE player_uuid = '" + stplayer_uuid + "' AND title_id = '" + title_id + "'";
+                    List<biyao.TitleData> rs = Sql().readquery(sql, player, "playertitle");
                     if (rs != null) {
-                        try {
-                            while (rs.next()) {
-                                boolean type = rs.getBoolean("prefix_enable");
+                        for(biyao.TitleData t : rs){
+                            boolean type = t.isPrefixEnable();
+                            if (type) {
+                                String sql1 = "UPDATE PlayerTitle ";
+                                sql1 += "SET prefix_enable = false";
+                                sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
+                                sql1 += " AND title_id = '" + title_id + "'";
+                                if (Sql().eventquery(sql1)) {
+                                    player.sendMessage("§2[TitlePlugin]前缀已禁用!");
+                                } else {
+                                    player.sendMessage("§4[TitlePlugin]前缀已禁失败!");
+                                }
+                            } else {
+                                String sql1 = "UPDATE PlayerTitle ";
+                                sql1 += "SET prefix_enable = true";
+                                sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
+                                sql1 += " AND title_id = '" + title_id + "'";
+                                if (Sql().eventquery(sql1)) {
+                                    player.sendMessage("§2[TitlePlugin]前缀已启用!");
+                                } else {
+                                    player.sendMessage("§4[TitlePlugin]前缀启用失败!");
+                                }
+                            }
+                        }
+
+                    } else if (event.getAction().toString().contains("RIGHT")) {
+                        String sql2 = "SELECT prefix_enable FROM PlayerTitle WHERE player_uuid = " + stplayer_uuid + " AND title_id = '" + title_id + "'";
+                        List<biyao.TitleData> rs2 = Sql().readquery(sql2, player, "playertitle");
+                        if (rs2 != null) {
+                            for(biyao.TitleData t : rs2){
+                                boolean type = t.isSuffixEnable();
                                 if (type) {
                                     String sql1 = "UPDATE PlayerTitle ";
-                                    sql1 += "SET prefix_enable = false";
+                                    sql1 += "SET suffix_enable = false";
                                     sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
-                                    sql1 += " AND title_id = " + title_id;
+                                    sql1 += " AND title_id = '" + title_id + "'";
                                     if (Sql().eventquery(sql1)) {
-                                        player.sendMessage("§2[TitlePlugin]前缀已禁用!");
+                                        player.sendMessage("§2[TitlePlugin]后缀已禁用!");
                                     } else {
-                                        player.sendMessage("§4[TitlePlugin]前缀已禁失败!");
+                                        player.sendMessage("§4[TitlePlugin]后缀已禁失败!");
                                     }
                                 } else {
                                     String sql1 = "UPDATE PlayerTitle ";
-                                    sql1 += "SET prefix_enable = true";
-                                    sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
+                                    sql1 += "SET suffix_enable = true";
+                                    sql1 += " WHERE player_uuid = " + stplayer_uuid;
                                     sql1 += " AND title_id = " + title_id;
                                     if (Sql().eventquery(sql1)) {
-                                        player.sendMessage("§2[TitlePlugin]前缀已启用!");
+                                        player.sendMessage("§2[TitlePlugin]后缀已启用!");
                                     } else {
-                                        player.sendMessage("§4[TitlePlugin]前缀启用失败!");
+                                        player.sendMessage("§4[TitlePlugin]后缀启用失败!");
                                     }
                                 }
-                            }
-                        } catch (Exception e) {
-                            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4个人仓库前缀禁用错误!");
-                        }
-                    } else if (event.getAction().toString().contains("RIGHT")) {
-                        String sql2 = "SELECT prefix_enable FROM PlayerTitle WHERE player_uuid = " + stplayer_uuid + " AND title_id = " + title_id;
-                        ResultSet rs2 = Sql().readquery(sql2, player);
-                        if (rs2 != null) {
-                            try {
-                                while (rs.next()) {
-                                    boolean type = rs.getBoolean("suffix_enable");
-                                    if (type) {
-                                        String sql1 = "UPDATE PlayerTitle ";
-                                        sql1 += "SET suffix_enable = false";
-                                        sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
-                                        sql1 += " AND title_id = " + title_id;
-                                        if (Sql().eventquery(sql1)) {
-                                            player.sendMessage("§2[TitlePlugin]后缀已禁用!");
-                                        } else {
-                                            player.sendMessage("§4[TitlePlugin]后缀已禁失败!");
-                                        }
-                                    } else {
-                                        String sql1 = "UPDATE PlayerTitle ";
-                                        sql1 += "SET suffix_enable = true";
-                                        sql1 += " WHERE player_uuid = " + stplayer_uuid;
-                                        sql1 += " AND title_id = " + title_id;
-                                        if (Sql().eventquery(sql1)) {
-                                            player.sendMessage("§2[TitlePlugin]后缀已启用!");
-                                        } else {
-                                            player.sendMessage("§4[TitlePlugin]后缀启用失败!");
-                                        }
-                                    }
-                                }
-                            } catch (Exception e) {
-                                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4个人仓库后缀禁用错误!");
                             }
                         }
                     }

@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static ideamc.titleplugin.TitlePlugin.getconfig;
 
@@ -111,6 +112,51 @@ public class MySQL implements sqlchoose{
         }
     }
     @Override
+    public boolean readquery (String sql, CommandSender sender, int a){
+        try {
+            String url = "jdbc:mysql://" + Host + ":" + Port + "/" + Database;
+            // 连接到数据库
+            connection = DriverManager.getConnection(url, Username, Password);
+            // 创建 Statement 对象
+            statement = connection.createStatement();
+        }catch (SQLException e){
+            sender.sendMessage("[TitlePlugin]§4" + e);;
+        }
+        if(statement != null && connection != null){
+            try {
+                resultSet = statement.executeQuery(sql);
+                if (Objects.requireNonNull(resultSet).next()) {
+                    int count = resultSet.getInt(1);
+                    if (count > 0) {
+                        return true;
+                    }else {
+                        return false;
+                    }
+                }
+            }catch (SQLException e){
+                sender.sendMessage("[TitlePlugin]§4" + e);
+            }finally {
+                try {
+                    if (resultSet != null) {
+                        resultSet.close();
+                        resultSet = null;
+                    }
+                    if (statement != null) {
+                        statement.close();
+                        statement = null;
+                    }
+                    if (connection != null) {
+                        connection.close();
+                        connection = null;
+                    }
+                } catch (SQLException e) {
+                    Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
+                }
+            }
+        }
+        return false;
+    }
+    @Override
     public List<biyao.TitleData> readquery(String sql, CommandSender sender, String table_name){
         try {
             String url = "jdbc:mysql://" + Host + ":" + Port + "/" + Database;
@@ -144,7 +190,7 @@ public class MySQL implements sqlchoose{
                         String expirationDate = resultSet.getString("expiration_date");
                         boolean prefixEnable = resultSet.getBoolean("prefix_enable");
                         boolean suffixEnable = resultSet.getBoolean("suffix_enable");
-                        titleData.add(new biyao.TitleData(titleId, null, null, null, 0, 0, false, null, 0, null, playerUuid,expirationDate, prefixEnable, suffixEnable))
+                        titleData.add(new biyao.TitleData(titleId, null, null, null, 0, 0, false, null, 0, null, playerUuid,expirationDate, prefixEnable, suffixEnable));
                     }
                 }
                 return titleData;
@@ -241,7 +287,7 @@ public class MySQL implements sqlchoose{
                         String expirationDate = resultSet.getString("expiration_date");
                         boolean prefixEnable = resultSet.getBoolean("prefix_enable");
                         boolean suffixEnable = resultSet.getBoolean("suffix_enable");
-                        titleData.add(new biyao.TitleData(titleId, null, null, null, 0, 0, false, null, 0, null, playerUuid,expirationDate, prefixEnable, suffixEnable))
+                        titleData.add(new biyao.TitleData(titleId, null, null, null, 0, 0, false, null, 0, null, playerUuid,expirationDate, prefixEnable, suffixEnable));
                     }
                 }
                 return titleData;

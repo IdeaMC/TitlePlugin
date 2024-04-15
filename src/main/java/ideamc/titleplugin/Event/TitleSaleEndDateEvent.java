@@ -1,9 +1,11 @@
 package ideamc.titleplugin.Event;
 
+import ideamc.titleplugin.GUI.biyao;
 import org.bukkit.Bukkit;
 
 import java.sql.ResultSet;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -79,24 +81,22 @@ public class TitleSaleEndDateEvent {
 
     public static void titlesaleendate(){
             String sql = "SELECT title_id, sale_end_date FROM Title";
-            ResultSet rs = Sql().readeventquery(sql);
+            List<biyao.TitleData> rs = Sql().readeventquery(sql, "title");
             if(rs != null){
-                try {
-                    while (rs.next()){
-                        int title_id = rs.getInt("title_id");
-                        String end_date = rs.getString("end_date");
-                        if(isDateLater(end_date)){
-                            String sql1 = "UPDATE Title";
-                            sql1 += " SET canbuy = false";
-                            sql1 += " WHERE title_id = " + title_id;
-                            if(Sql().eventquery(sql1)){
-                                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2称号ID为" + title_id + "的称号已到截止日期,已修改为不能购买!");
-                            }else{
-                                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4称号ID为" + title_id + "的称号到截止日期时修改为不能购买失败!");
-                            }
+                for(biyao.TitleData t : rs){
+                    int title_id = t.getTitleId();
+                    String end_date = t.getSaleEndDate();
+                    if(isDateLater(end_date)){
+                        String sql1 = "UPDATE Title";
+                        sql1 += " SET canbuy = false";
+                        sql1 += " WHERE title_id = " + title_id;
+                        if(Sql().eventquery(sql1)){
+                            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2称号ID为" + title_id + "的称号已到截止日期,已修改为不能购买!");
+                        }else{
+                            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4称号ID为" + title_id + "的称号到截止日期时修改为不能购买失败!");
                         }
                     }
-                }catch (Exception ignored){}
+                }
             }
         }
 }
