@@ -15,7 +15,7 @@ public class EditTitle {
     public static void edittitle(CommandSender sender, int title_id, String changetype, String a){
         if(changetype.equalsIgnoreCase("setpermission")){
             String sql = "UPDATE Title ";
-            sql += "SET permission = " + a;
+            sql += "SET permission = '" + a + "'";
             sql += " WHERE title_id = " + title_id;
             if(Sql().query(sql,sender)){
                 String sql1 = "SELECT COUNT(*) FROM PlayerTitle";
@@ -39,7 +39,7 @@ public class EditTitle {
             }
         }else if(changetype.equalsIgnoreCase("setdescription")){
             String sql = "UPDATE Title ";
-            sql += "SET description = " + a;
+            sql += "SET description = '" + a + "'";
             sql += " WHERE title_id = " + title_id;
             if(Sql().query(sql,sender)){
                 sender.sendMessage("§2[TitlePlugin]修改成功!");
@@ -109,7 +109,7 @@ public class EditTitle {
                 canbuy = false;
             }
             String sql = "UPDATE Title ";
-            sql += "SET sale_end_date = " + jzrq;
+            sql += "SET sale_end_date = '" + jzrq + "'";
             sql += ", canbuy = " + canbuy;
             sql += " WHERE title_id = " + title_id;
             if(Sql().query(sql,sender)){

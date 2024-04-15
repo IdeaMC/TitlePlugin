@@ -111,7 +111,7 @@ public class biyao {
             try{
                 while (rs.next()) {
                     int title_id = rs.getInt("title_id");
-                    String sql1 = "SELECT * FROM Title WHERE title_id = " + title_id;
+                    String sql1 = "SELECT * FROM Title WHERE title_id = '" + title_id + "'";
                     ResultSet rs1 = Sql().readeventquery(sql1);
                     if(rs1 != null){
                         try{

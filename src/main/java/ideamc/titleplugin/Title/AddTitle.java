@@ -25,8 +25,8 @@ public class AddTitle {
         String stplayer_uuid = Bukkit.getPlayer(playername).getUniqueId().toString();
         String expiration_date = Date.addDaysToDate(Date.getCurrentDate(), youxiao);
         String sql = "INSERT INTO PlayerTitle (player_uuid, title_id, expiration_date, prefix_enable, suffix_enable) VALUES ";
-        sql += "('" + stplayer_uuid + "', '";
-        sql += title_id + "', '";
+        sql += "('" + stplayer_uuid + "', ";
+        sql += title_id + ", '";
         sql += expiration_date + "', ";
         sql += "false, ";
         sql += "false)";
@@ -39,8 +39,8 @@ public class AddTitle {
 
     public static boolean eventaddtitle(String player_uuid, int title_id){
         String sql = "INSERT INTO PlayerTitle (player_uuid, title_id, prefix_enable, suffix_enable) VALUES ";
-        sql += "('" + player_uuid + "', '";
-        sql += title_id + "', ";
+        sql += "('" + player_uuid + "', ";
+        sql += title_id + ", ";
         sql += "false, ";
         sql += "false)";
         return Sql().eventquery(sql);

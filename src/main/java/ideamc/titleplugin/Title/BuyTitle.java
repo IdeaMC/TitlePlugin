@@ -30,18 +30,18 @@ public class BuyTitle {
                             if(youxiao != 0){
                                 String date = addDaysToDate(getCurrentDate(),youxiao);
                                 sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
-                                sql1 += " ('" + title_id + "', ";
-                                sql1 += stplayer_uuid + ", '";
-                                sql1 += date + "', ";
-                                sql1 += "false, ";
-                                sql1 += "false)";
+                                sql1 += " (" + title_id + ",";
+                                sql1 += " '" + stplayer_uuid + "',";
+                                sql1 += " '" + date + "',";
+                                sql1 += " false,";
+                                sql1 += " false)";
                             }else{
                                 sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
-                                sql1 += " ('" + title_id + "', ";
-                                sql1 += stplayer_uuid + ", ";
-                                sql1 += "NULL, ";
-                                sql1 += "false, ";
-                                sql1 += "false)";
+                                sql1 += " (" + title_id + ",";
+                                sql1 += " '" + stplayer_uuid + ",";
+                                sql1 += " NULL,";
+                                sql1 += " false, ";
+                                sql1 += " false)";
                             }
                             if(Sql().query(sql1,sender)){
                                 sender.sendMessage("§2[TitlePlugin]称号ID" + title_id + "成功!");
@@ -74,18 +74,18 @@ public class BuyTitle {
                             if(youxiao != 0){
                                 String date = addDaysToDate(getCurrentDate(),youxiao);
                                 sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
-                                sql1 += " ('" + title_id + "', ";
-                                sql1 += stplayer_uuid + ", '";
-                                sql1 += date + "', ";
-                                sql1 += "false, ";
-                                sql1 += "false)";
+                                sql1 += " (" + title_id + ",";
+                                sql1 += " '" + stplayer_uuid + "',";
+                                sql1 += " '" + date + "',";
+                                sql1 += " false,";
+                                sql1 += " false)";
                             }else{
                                 sql1 = "INSERT INTO PlayerTitle (title_id,player_uuid,expiration_date,prefix_enable,suffix_enable) VALUES";
-                                sql1 += " ('" + title_id + "', ";
-                                sql1 += stplayer_uuid + ", ";
-                                sql1 += "NULL, ";
-                                sql1 += "false, ";
-                                sql1 += "false)";
+                                sql1 += " (" + title_id + ",";
+                                sql1 += " ' " + stplayer_uuid + "',";
+                                sql1 += " NULL,";
+                                sql1 += " false,";
+                                sql1 += " false)";
                             }
                             if(Sql().query(sql1,sender)){
                                 sender.sendMessage("§2[TitlePlugin]购买成功!");
@@ -93,6 +93,8 @@ public class BuyTitle {
                                 sender.sendMessage("§4[TitlePlugin]购买失败!");
                             }
                         }
+                    }else{
+                        sender.sendMessage("§4[TitlePlugin]该称号无法购买!");
                     }
                 }
             }catch (Exception ignored){}

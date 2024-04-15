@@ -17,8 +17,6 @@ import java.util.UUID;
 
 import static ideamc.titleplugin.GUI.biyao.createGeRenTitleItem;
 import static ideamc.titleplugin.GUI.biyao.readgerendatabase;
-import static ideamc.titleplugin.Title.BuyTitle.buycoin;
-import static ideamc.titleplugin.Title.BuyTitle.buypoint;
 import static ideamc.titleplugin.TitlePlugin.Sql;
 
 public class GeRenGui implements Listener {
@@ -36,7 +34,6 @@ public class GeRenGui implements Listener {
         gui = Bukkit.createInventory(null, 54, "个人称号");
 
         refillInventory((Player) sender);
-
 
     }
 
@@ -95,7 +92,7 @@ public class GeRenGui implements Listener {
                 int title_id = Integer.parseInt(stitle_id);
 
                 if (event.getAction().toString().contains("LEFT")) {
-                    String sql = "SELECT prefix_enable FROM PlayerTitle WHERE player_uuid = " + stplayer_uuid + " AND title_id = " + title_id;
+                    String sql = "SELECT prefix_enable FROM PlayerTitle WHERE player_uuid = '" + stplayer_uuid + "' AND title_id = " + title_id;
                     ResultSet rs = Sql().readquery(sql, player);
                     if (rs != null) {
                         try {
@@ -104,7 +101,7 @@ public class GeRenGui implements Listener {
                                 if (type) {
                                     String sql1 = "UPDATE PlayerTitle ";
                                     sql1 += "SET prefix_enable = false";
-                                    sql1 += " WHERE player_uuid = " + stplayer_uuid;
+                                    sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
                                     sql1 += " AND title_id = " + title_id;
                                     if (Sql().eventquery(sql1)) {
                                         player.sendMessage("§2[TitlePlugin]前缀已禁用!");
@@ -114,7 +111,7 @@ public class GeRenGui implements Listener {
                                 } else {
                                     String sql1 = "UPDATE PlayerTitle ";
                                     sql1 += "SET prefix_enable = true";
-                                    sql1 += " WHERE player_uuid = " + stplayer_uuid;
+                                    sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
                                     sql1 += " AND title_id = " + title_id;
                                     if (Sql().eventquery(sql1)) {
                                         player.sendMessage("§2[TitlePlugin]前缀已启用!");
@@ -135,7 +132,7 @@ public class GeRenGui implements Listener {
                                     if (type) {
                                         String sql1 = "UPDATE PlayerTitle ";
                                         sql1 += "SET suffix_enable = false";
-                                        sql1 += " WHERE player_uuid = " + stplayer_uuid;
+                                        sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
                                         sql1 += " AND title_id = " + title_id;
                                         if (Sql().eventquery(sql1)) {
                                             player.sendMessage("§2[TitlePlugin]后缀已禁用!");
