@@ -2,6 +2,7 @@ package ideamc.titleplugin;
 
 import ideamc.titleplugin.Command.AdminCommand;
 import ideamc.titleplugin.Command.PlayerCommand;
+import ideamc.titleplugin.Command.TabCommand;
 import ideamc.titleplugin.Event.TitleSaleEndDateEvent;
 import ideamc.titleplugin.Event.playerJoinEvent;
 import ideamc.titleplugin.SQL.Sql;
@@ -37,6 +38,7 @@ public class TitlePlugin extends JavaPlugin {
 
         new AdminCommand(this);
         new PlayerCommand(this);
+        new TabCommand(this);
 
         //挂钩vault
         if (!setupEconomy() ) {
@@ -50,6 +52,13 @@ public class TitlePlugin extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2前置PlayerPoints已找到!");
         }else{
             Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置PlayerPoints未找到,点券购买功能无法使用!");
+        }
+        //挂钩papi
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            new Papi(this).register();
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2前置PlaceholderAPI已找到!");
+        }else{
+            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置PlaceholderAPI未找到,变量功能无法使用!");
         }
 
         new playerJoinEvent(this);

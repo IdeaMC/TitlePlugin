@@ -1,15 +1,19 @@
 package ideamc.titleplugin.SQL;
 
+import ideamc.titleplugin.GUI.biyao;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static ideamc.titleplugin.TitlePlugin.getconfig;
 
 public class MySQL implements sqlchoose{
     private static Connection connection;
     private static Statement statement;
+    private static ResultSet resultSet;
     private static int Port;
     private static String Host;
     private static String Username;
@@ -107,7 +111,7 @@ public class MySQL implements sqlchoose{
         }
     }
     @Override
-    public ResultSet readquery(String sql, CommandSender sender){
+    public List<biyao.TitleData> readquery(String sql, CommandSender sender, String table_name){
         try {
             String url = "jdbc:mysql://" + Host + ":" + Port + "/" + Database;
             // 连接到数据库
@@ -119,11 +123,39 @@ public class MySQL implements sqlchoose{
         }
         if(statement != null && connection != null){
             try {
-                return statement.executeQuery(sql);
+                resultSet = statement.executeQuery(sql);
+                List<biyao.TitleData> titleData = new ArrayList<>();
+                while (resultSet.next()) {
+                    if(table_name.equalsIgnoreCase("title")){
+                        int titleId = resultSet.getInt("title_id");
+                        String titleName = resultSet.getString("title_name");
+                        String type = resultSet.getString("type");
+                        String description = resultSet.getString("description");
+                        int coin = resultSet.getInt("vault");
+                        int point = resultSet.getInt("playerpoints");
+                        boolean canBuy = resultSet.getBoolean("canbuy");
+                        String permission = resultSet.getString("permission");
+                        int youxiao = resultSet.getInt("youxiao");
+                        String saleEndDate = resultSet.getString("sale_end_date");
+                        titleData.add(new biyao.TitleData(titleId, titleName, type, description, coin, point, canBuy, permission, youxiao, saleEndDate, null, null,true, true));
+                    }else if(table_name.equalsIgnoreCase("playertitle")){
+                        int titleId = resultSet.getInt("title_id");
+                        String playerUuid = resultSet.getString("player_uuid");
+                        String expirationDate = resultSet.getString("expiration_date");
+                        boolean prefixEnable = resultSet.getBoolean("prefix_enable");
+                        boolean suffixEnable = resultSet.getBoolean("suffix_enable");
+                        titleData.add(new biyao.TitleData(titleId, null, null, null, 0, 0, false, null, 0, null, playerUuid,expirationDate, prefixEnable, suffixEnable))
+                    }
+                }
+                return titleData;
             }catch (SQLException e){
                 sender.sendMessage("[TitlePlugin]§4" + e);
             }finally {
                 try {
+                    if (resultSet != null) {
+                        resultSet.close();
+                        resultSet = null;
+                    }
                     if (statement != null) {
                         statement.close();
                         statement = null;
@@ -176,7 +208,7 @@ public class MySQL implements sqlchoose{
         }
     }
     @Override
-    public ResultSet readeventquery(String sql){
+    public List<biyao.TitleData> readeventquery(String sql, String table_name){
         try {
             String url = "jdbc:mysql://" + Host + ":" + Port + "/" + Database;
             // 连接到数据库
@@ -188,11 +220,39 @@ public class MySQL implements sqlchoose{
         }
         if(statement != null && connection != null){
             try {
-                return statement.executeQuery(sql);
+                resultSet = statement.executeQuery(sql);
+                List<biyao.TitleData> titleData = new ArrayList<>();
+                while (resultSet.next()) {
+                    if(table_name.equalsIgnoreCase("title")){
+                        int titleId = resultSet.getInt("title_id");
+                        String titleName = resultSet.getString("title_name");
+                        String type = resultSet.getString("type");
+                        String description = resultSet.getString("description");
+                        int coin = resultSet.getInt("vault");
+                        int point = resultSet.getInt("playerpoints");
+                        boolean canBuy = resultSet.getBoolean("canbuy");
+                        String permission = resultSet.getString("permission");
+                        int youxiao = resultSet.getInt("youxiao");
+                        String saleEndDate = resultSet.getString("sale_end_date");
+                        titleData.add(new biyao.TitleData(titleId, titleName, type, description, coin, point, canBuy, permission, youxiao, saleEndDate, null, null,true, true));
+                    }else if(table_name.equalsIgnoreCase("playertitle")){
+                        int titleId = resultSet.getInt("title_id");
+                        String playerUuid = resultSet.getString("player_uuid");
+                        String expirationDate = resultSet.getString("expiration_date");
+                        boolean prefixEnable = resultSet.getBoolean("prefix_enable");
+                        boolean suffixEnable = resultSet.getBoolean("suffix_enable");
+                        titleData.add(new biyao.TitleData(titleId, null, null, null, 0, 0, false, null, 0, null, playerUuid,expirationDate, prefixEnable, suffixEnable))
+                    }
+                }
+                return titleData;
             }catch (SQLException e){
                 Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4" + e);
             }finally {
                 try {
+                    if (resultSet != null) {
+                        resultSet.close();
+                        resultSet = null;
+                    }
                     if (statement != null) {
                         statement.close();
                         statement = null;

@@ -120,7 +120,8 @@ public class GeRenGui implements Listener {
                                     }
                                 }
                             }
-                        } catch (Exception ignored) {
+                        } catch (Exception e) {
+                            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4个人仓库前缀禁用错误!");
                         }
                     } else if (event.getAction().toString().contains("RIGHT")) {
                         String sql2 = "SELECT prefix_enable FROM PlayerTitle WHERE player_uuid = " + stplayer_uuid + " AND title_id = " + title_id;
@@ -151,7 +152,8 @@ public class GeRenGui implements Listener {
                                         }
                                     }
                                 }
-                            } catch (Exception ignored) {
+                            } catch (Exception e) {
+                                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4个人仓库后缀禁用错误!");
                             }
                         }
                     }

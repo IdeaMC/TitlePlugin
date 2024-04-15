@@ -1,10 +1,13 @@
 package ideamc.titleplugin.Title;
 
 import ideamc.titleplugin.Date;
+import ideamc.titleplugin.GUI.biyao;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 
 import static ideamc.titleplugin.TitlePlugin.Sql;
@@ -20,7 +23,7 @@ public class EditTitle {
             if(Sql().query(sql,sender)){
                 String sql1 = "SELECT COUNT(*) FROM PlayerTitle";
                 sql1 += " WHERE title_id = " + title_id;
-                ResultSet resultSet = Sql().readquery(sql1,sender);
+                List<biyao.TitleData> resultSet = Sql().readquery(sql1,sender,"playertitle");
                 try {
                     if (Objects.requireNonNull(resultSet).next()) {
                         int count = resultSet.getInt(1);
@@ -30,7 +33,8 @@ public class EditTitle {
                             Sql().query(sql2,sender);
                         }
                     }
-                } catch (SQLException ignored) {
+                } catch (SQLException e) {
+                    sender.sendMessage("§4[TitlePlugin]修改称号权限成功!但删除玩家称号错误!");
                 }
                 sender.sendMessage("§2[TitlePlugin]修改成功!");
                 sender.sendMessage("§2[TitlePlugin]称号ID" + title_id + "所需权限修改为" + a);

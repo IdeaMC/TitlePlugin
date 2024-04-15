@@ -99,8 +99,8 @@ public class ShopGui implements Listener {
                                 buypoint(player, title_id);
                             }
                         }
-                    }catch (Exception ignored){
-                    }
+                    }catch (Exception e){
+                        Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4商店购买错误!");                    }
                 }
             }
 

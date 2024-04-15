@@ -2,10 +2,14 @@ package ideamc.titleplugin.Title;
 
 import static ideamc.titleplugin.ColorA.ColorB;
 import static ideamc.titleplugin.TitlePlugin.Sql;
+
+import ideamc.titleplugin.GUI.biyao;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -33,13 +37,14 @@ public class CreateTitle {
         if(Sql().query(sql,sender)){
             String sql1 = "SELECT title_id FROM Title";
             sql1 += " WHERE title_name = '" + Ctitlename + "'";
-            ResultSet resultSet = Sql().readquery(sql1,sender);
-            try {
-                if (Objects.requireNonNull(resultSet).next()) {
-                    int title_id = resultSet.getInt("title_id");
+            List<biyao.TitleData> resultSet = Sql().readquery(sql1,sender,"title");
+            if (resultSet != null){
+                for(biyao.TitleData t1 : resultSet){
+                    int title_id = t1.getTitleId();
                     sender.sendMessage("§2[TitlePlugin]创建成功!称号ID为" + title_id);
                 }
-            } catch (SQLException ignored) {
+            }else {
+                sender.sendMessage("§4[TitlePlugin]创建成功!但是读取称号ID错误!");
             }
         }else{
             sender.sendMessage("§4l[TitlePlugin]创建失败!");
@@ -78,13 +83,14 @@ public class CreateTitle {
         if(Sql().query(sql,sender)){
             String sql1 = "SELECT title_id FROM Title";
             sql1 += " WHERE title_name = '" + Ctitlename + "'";
-            ResultSet resultSet = Sql().readquery(sql1,sender);
-            try {
-                if (Objects.requireNonNull(resultSet).next()) {
-                    int title_id = resultSet.getInt("title_id");
+            List<biyao.TitleData> resultSet = Sql().readquery(sql1,sender,"title");
+            if(resultSet != null){
+                for(biyao.TitleData t1 : resultSet){
+                    int title_id = t1.getTitleId();
                     sender.sendMessage("§2[TitlePlugin]创建成功!称号ID为" + title_id);
                 }
-            } catch (SQLException ignored) {
+            }else{
+                sender.sendMessage("§4[TitlePlugin]创建成功!但是读取称号ID错误!");
             }
         }else{
             sender.sendMessage("§4[TitlePlugin]创建失败!");
@@ -113,13 +119,14 @@ public class CreateTitle {
         if(Sql().query(sql,sender)){
             String sql1 = "SELECT title_id FROM Title";
             sql1 += " WHERE title_name = '" + Ctitlename + "'";
-            ResultSet resultSet = Sql().readquery(sql1,sender);
-            try {
-                if (Objects.requireNonNull(resultSet).next()) {
-                    int title_id = resultSet.getInt("title_id");
+            List<biyao.TitleData> resultSet = Sql().readquery(sql1,sender,"title");
+            if(resultSet != null){
+                for(biyao.TitleData t1 : resultSet){
+                    int title_id = t1.getTitleId();
                     sender.sendMessage("§2[TitlePlugin]创建成功!称号ID为" + title_id);
                 }
-            } catch (SQLException ignored) {
+            }else{
+                sender.sendMessage("§4[TitlePlugin]创建成功!但是读取称号ID错误!");
             }
         }else{
             sender.sendMessage("§4[TitlePlugin]创建失败!");

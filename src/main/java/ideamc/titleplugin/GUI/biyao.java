@@ -1,5 +1,6 @@
 package ideamc.titleplugin.GUI;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -26,7 +27,9 @@ public class biyao {
                 while (rs1.next()) {
                     playerhvae.add(rs1.getInt("title_id"));
                 }
-            }catch (Exception ignored){}
+            }catch (Exception e){
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4商店读取个人数据库错误");
+            }
         }
         if(rs != null){
             try{
@@ -46,7 +49,11 @@ public class biyao {
                         titles.add(new TitleData(titleId, titleName, type, description, coin, point, canBuy, permission, youxiao, saleEndDate, null, false, false));
                     }
                 }
-            }catch (Exception ignored){}
+            }catch (Exception e){
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4商店读取数据库错误!" + e.getMessage());
+            }
+        }else{
+            player.sendMessage("§4[TitlePlugin]商店中没有称号!");
         }
 
         return titles;
@@ -132,10 +139,14 @@ public class biyao {
 
                                 titles.add(new TitleData(titleId, titleName, type, description, coin, point, canBuy, permission, youxiao, saleEndDate, expireDate, prefixEnable, suffixEnable));
                             }
-                        }catch (Exception ignored){}
+                        }catch (Exception e){
+                            Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4个人仓库读取数据库错误2!");
+                        }
                     }
                 }
-            }catch (Exception ignored){}
+            }catch (Exception e){
+                Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4个人仓库读取数据库错误1!");
+            }
         }
 
         return titles;
@@ -177,11 +188,12 @@ public class biyao {
         String permission;
         int youxiao;
         String saleEndDate;
+        String playerUUID;
         String expirationDate;
         boolean prefixEnable;
         boolean suffixEnable;
 
-        TitleData(int titleId, String titleName, String type, String description, int coin, int points, boolean canBuy, String permission, int youxiao, String saleEndDate, String expirationDate, boolean prefixEnable, boolean suffixEnable) {
+        public TitleData(int titleId, String titleName, String type, String description, int coin, int points, boolean canBuy, String permission, int youxiao, String saleEndDate, String playerUUID, String expirationDate, boolean prefixEnable, boolean suffixEnable) {
             this.titleId = titleId;
             this.titleName = titleName;
             this.type = type;
@@ -192,6 +204,7 @@ public class biyao {
             this.permission = permission;
             this.youxiao = youxiao;
             this.saleEndDate = saleEndDate;
+            this.playerUUID = playerUUID;
             this.expirationDate = expirationDate;
             this.prefixEnable = prefixEnable;
             this.suffixEnable = suffixEnable;
@@ -225,6 +238,9 @@ public class biyao {
         }
         public String getSaleEndDate() {
             return saleEndDate;
+        }
+        public String getPlayerUUID() {
+            return playerUUID;
         }
         public String getExpirationDate() {
             return expirationDate;
