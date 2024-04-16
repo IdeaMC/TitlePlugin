@@ -36,7 +36,8 @@ public interface sqlchoose {
      * @param sql sql语句
      * @param sender 玩家
      * @param table_name sql语句中的表名
-     * 返回boolean类型(成功/失败)
+     * select时一定要 select *
+     * 返回TitleData类型的数据 具体见GUI文件夹里的biyao.java
      */
     List<biyao.TitleData> readquery(String sql, CommandSender sender, String table_name);
     /**
@@ -45,7 +46,7 @@ public interface sqlchoose {
      * @param sql sql语句
      * @param sender 玩家
      * @param a 填1就行
-     * 返回TitleData类型的数据 具体见GUI文件夹里的biyao.java
+     * 返回boolean类型(成功/失败)
      */
     boolean readquery (String sql, CommandSender sender, int a);
     /**
@@ -53,6 +54,7 @@ public interface sqlchoose {
      *
      * @param sql sql语句
      * @param table_name sql语句中的表名
+     * select时一定要 select *
      * 返回TitleData类型的数据 具体见GUI文件夹里的biyao.java
      */
     List<biyao.TitleData> readeventquery(String sql, String table_name);
