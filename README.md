@@ -57,3 +57,4 @@
 例子:/atip create activity &#FF00EE苏小林林林林&#00FFFF
 
 这样子就可以创建一个渐变颜色的活动称号
+## 开源遵循GPL-3.0协议
