@@ -4,16 +4,10 @@ import static ideamc.titleplugin.ColorA.ColorB;
 import static ideamc.titleplugin.TitlePlugin.Sql;
 
 import ideamc.titleplugin.GUI.biyao;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 
-
-// /ps create [type] [title名称] [coin/playerpoints/permission]
 public class CreateTitle {
     //活动title的创建
     public static void createtitle(CommandSender sender, String type, String titleName, String description){

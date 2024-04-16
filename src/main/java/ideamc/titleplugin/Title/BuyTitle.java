@@ -4,9 +4,7 @@ import ideamc.titleplugin.GUI.biyao;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
-import java.sql.ResultSet;
 import java.util.List;
-import java.util.UUID;
 
 import static ideamc.titleplugin.Date.addDaysToDate;
 import static ideamc.titleplugin.Date.getCurrentDate;

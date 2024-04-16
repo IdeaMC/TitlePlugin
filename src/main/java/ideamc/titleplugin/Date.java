@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-import static java.util.function.Predicate.isEqual;
-
 public class Date {
     //获取当前日期
     public static String getCurrentDate() {

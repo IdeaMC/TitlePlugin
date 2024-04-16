@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static ideamc.titleplugin.TitlePlugin.Sql;
-
 public class Sql implements sqlchoose{
     private static Connection connection = null;
     private static Statement statement = null;

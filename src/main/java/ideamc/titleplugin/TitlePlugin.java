@@ -25,7 +25,7 @@ import static ideamc.titleplugin.Event.TitleSaleEndDateEvent.titlesaleendate;
 public class TitlePlugin extends JavaPlugin {
     private static FileConfiguration config;
     private static Economy econ = null;
-    private PlayerPointsAPI playerpointsAPI;
+    private static PlayerPointsAPI playerpointsAPI;
 
     @Override
     public void onEnable() {
@@ -58,7 +58,7 @@ public class TitlePlugin extends JavaPlugin {
         }
         //挂钩playerpoints
         if (Bukkit.getPluginManager().isPluginEnabled("PlayerPoints")) {
-            this.playerpointsAPI = PlayerPoints.getInstance().getAPI();
+            playerpointsAPI = PlayerPoints.getInstance().getAPI();
             Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§2前置PlayerPoints已找到!");
         }else{
             Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置PlayerPoints未找到,点券购买功能无法使用!");
@@ -102,7 +102,7 @@ public class TitlePlugin extends JavaPlugin {
     }
 
     public static PlayerPointsAPI getPlayerPointsAPI() {
-        return getPlayerPointsAPI();
+        return playerpointsAPI;
     }
 
     public static FileConfiguration getconfig() {

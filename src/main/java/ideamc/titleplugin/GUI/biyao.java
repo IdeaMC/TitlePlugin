@@ -1,13 +1,10 @@
 package ideamc.titleplugin.GUI;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.sql.ResultSet;
 import java.util.*;
 
 import static ideamc.titleplugin.TitlePlugin.Sql;
