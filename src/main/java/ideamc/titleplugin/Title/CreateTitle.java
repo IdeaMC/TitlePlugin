@@ -35,13 +35,13 @@ public class CreateTitle {
             if (resultSet != null){
                 for(biyao.TitleData t1 : resultSet){
                     int title_id = t1.getTitleId();
-                    sender.sendMessage("§2[TitlePlugin]创建成功!称号ID为" + title_id);
+                    sender.sendMessage("[TitlePlugin]§2创建成功!称号ID为" + title_id);
                 }
             }else {
-                sender.sendMessage("§4[TitlePlugin]创建成功!但是读取称号ID错误!");
+                sender.sendMessage("[TitlePlugin]§4创建成功!但是读取称号ID错误!");
             }
         }else{
-            sender.sendMessage("§4l[TitlePlugin]创建失败!");
+            sender.sendMessage("[TitlePlugin]§4创建失败!");
         }
     }
     //点券or金币title的创建

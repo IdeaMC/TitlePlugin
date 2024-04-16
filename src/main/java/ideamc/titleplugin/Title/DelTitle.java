@@ -11,7 +11,7 @@ public class DelTitle {
     public static void delatitle(CommandSender sender, int title_id){
         String sql = "DELETE FROM Title WHERE title_id = " + title_id;
         if(Sql().query(sql, sender)){
-            sender.sendMessage("§2[TitlePlugin]删除成功!");
+            sender.sendMessage("[TitlePlugin]§2删除成功!");
             String sql1 = "DELETE FROM PlayerTitle WHERE title_id = " + title_id;
             if(Sql().query(sql1, sender)){
                 sender.sendMessage("[TitlePlugin]§2已从玩家移除称号ID" + title_id);

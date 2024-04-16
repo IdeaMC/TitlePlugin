@@ -36,7 +36,7 @@ public class EditTitle {
                 sender.sendMessage("[TitlePlugin]§2修改成功!");
                 sender.sendMessage("[TitlePlugin]§2称号ID" + title_id + "称号描述修改为" + a);
             }else{
-                sender.sendMessage("§4[TitlePlugin]修改失败!");
+                sender.sendMessage("[TitlePlugin]§4修改失败!");
             }
         }else if(changetype.equalsIgnoreCase("setcanbuy")){
             boolean canbuy = a.equalsIgnoreCase("true");
