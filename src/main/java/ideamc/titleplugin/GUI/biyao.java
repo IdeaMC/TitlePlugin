@@ -179,8 +179,8 @@ public class biyao {
         if(titleData.getExpirationDate() != null){
             lore.add("有效期至:" + titleData.getExpirationDate());
         }
-        lore.add("前缀:" + (titleData.isPrefixEnable() ? "启用" : "禁用"));
-        lore.add("后缀:" + (titleData.isSuffixEnable() ? "启用" : "禁用"));
+        lore.add("前缀:" + (titleData.isPrefixEnable() ? "§2启用" : "§4禁用"));
+        lore.add("后缀:" + (titleData.isSuffixEnable() ? "§2启用" : "§4禁用"));
         lore.add("左键启用/禁用前缀");
         lore.add("右键启用/禁用后缀");
 
