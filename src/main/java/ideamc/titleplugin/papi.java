@@ -1,12 +1,12 @@
 package ideamc.titleplugin;
 
 import ideamc.titleplugin.GUI.biyao;
+
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.Bukkit;
+
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,12 +43,12 @@ public class Papi extends PlaceholderExpansion {
         UUID player_uuid = player.getUniqueId();
         String stplayer_uuid = player_uuid.toString();
         if (params.equalsIgnoreCase("player_prefix")) {
-            String sql = "SELECT title_id FROM PlayerTitle WHERE prefix_enable = true AND player_uuid = '" + stplayer_uuid + "'";
+            String sql = "SELECT * FROM PlayerTitle WHERE prefix_enable = true AND player_uuid = '" + stplayer_uuid + "'";
             List<biyao.TitleData> rs = Sql().readeventquery(sql, "playertitle");
             if (rs != null){
                 for(biyao.TitleData t : rs){
                     int title_id = t.getTitleId();
-                    String sql1 = "SELECT title_name FROM Title WHERE title_id = " + title_id;
+                    String sql1 = "SELECT * FROM Title WHERE title_id = " + title_id;
                     List<biyao.TitleData> rs1 = Sql().readeventquery(sql1, "title");
                     if (rs1 != null){
                         for(biyao.TitleData t1 : rs1){
@@ -58,12 +58,12 @@ public class Papi extends PlaceholderExpansion {
                 }
             }
         } else if (params.equalsIgnoreCase("player_suffix")) {
-            String sql = "SELECT title_id FROM PlayerTitle WHERE suffix_enable = true AND player_uuid = '" + stplayer_uuid + "'";
+            String sql = "SELECT * FROM PlayerTitle WHERE suffix_enable = true AND player_uuid = '" + stplayer_uuid + "'";
             List<biyao.TitleData> rs = Sql().readeventquery(sql, "playertitle");
             if (rs != null){
                 for(biyao.TitleData t : rs){
                     int title_id = t.getTitleId();
-                    String sql1 = "SELECT title_name FROM Title WHERE title_id = " + title_id;
+                    String sql1 = "SELECT * FROM Title WHERE title_id = " + title_id;
                     List<biyao.TitleData> rs1 = Sql().readeventquery(sql1, "title");
                     if (rs1 != null){
                         for(biyao.TitleData t1 : rs1){
