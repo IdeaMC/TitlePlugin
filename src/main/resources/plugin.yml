@@ -16,6 +16,7 @@ commands:
     usage: '/tip'
     permission: 'titleplugin.player'
     permission-message: 'You do not have permission to use this command.'
+    default: true
   atip:
     description: 'op command of TitlePlugin'
     usage: '/atip'
