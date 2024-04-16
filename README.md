@@ -4,6 +4,7 @@
 ### 支持渐变颜色
 ### 支持经济插件(使用vault的插件)
 ### 支持点券插件(playerpoints)
+### 请搭配聊天插件使用
 ## 指令+用法+权限
 ### 玩家:
 
@@ -52,7 +53,12 @@
 /atip add [玩家] [称号ID] ---向玩家添加称号",
 
 /atip add [玩家] [称号ID] [天数] ---向玩家添加具有有效期的称号
+
 /atip del [玩家] [称号ID] ---从玩家那里删除称号
+## 变量
+前缀:%titleplugin_player_prefix%
+
+后缀:%titleplugin_player_suffix%
 ## 渐变称号的创建
 例子:/atip create activity &#FF00EE苏小林林林林&#00FFFF
 
