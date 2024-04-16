@@ -32,6 +32,7 @@ public class TabCommand implements TabCompleter {
             "ui"
     );
     private final List<String> admintabCommands = Arrays.asList(
+            "list",
             "create",
             "del",
             "setcoin",
