@@ -98,8 +98,10 @@ public class ShopGui implements Listener {
                         String type = t.getType();
                         if(type.equals("coin")){
                             buycoin(player, title_id);
+                            player.closeInventory();
                         }else if(type.equals("points")){
                             buypoint(player, title_id);
+                            player.closeInventory();
                         }else{
                             player.sendMessage("[TitlePlugin]§4此称号不能购买");
                             player.closeInventory();
