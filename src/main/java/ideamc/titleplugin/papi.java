@@ -33,13 +33,19 @@ public class Papi extends PlaceholderExpansion {
     }
 
     @Override
+    public boolean persist() {
+        return true; //
+    }
+
+    @Override
     @NotNull
     public String getVersion() {
         return plugin.getDescription().getVersion(); //
     }
 
     @Override
-    public String onRequest(OfflinePlayer player, @NotNull String params) {
+    @NotNull
+    public String onRequest(OfflinePlayer player, String params) {
         UUID player_uuid = player.getUniqueId();
         String stplayer_uuid = player_uuid.toString();
         if (params.equalsIgnoreCase("player_prefix")) {
