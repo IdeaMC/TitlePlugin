@@ -14,12 +14,12 @@ public class DelTitle {
             sender.sendMessage("§2[TitlePlugin]删除成功!");
             String sql1 = "DELETE FROM PlayerTitle WHERE title_id = " + title_id;
             if(Sql().query(sql1, sender)){
-                sender.sendMessage("§2[TitlePlugin]已从玩家移除称号ID" + title_id);
+                sender.sendMessage("[TitlePlugin]§2已从玩家移除称号ID" + title_id);
             }else{
-                sender.sendMessage("§4[TitlePlugin]从玩家移除称号ID" + title_id + "失败!");
+                sender.sendMessage("[TitlePlugin]§4从玩家移除称号ID" + title_id + "失败!");
             }
         }else{
-            sender.sendMessage("§4[TitlePlugin]删除失败!");
+            sender.sendMessage("[TitlePlugin]§4删除失败!");
         }
     }
 
@@ -28,9 +28,9 @@ public class DelTitle {
         String stplayer_uuid = player_uuid.toString();
         String sql = "DELETE FROM PlayerTitle WHERE player_uuid = '" + stplayer_uuid + "' AND title_id = " + title_id;
         if(Sql().query(sql, sender)){
-            sender.sendMessage("§2[TitlePlugin]已从玩家" + playername + "移除称号ID" + title_id);
+            sender.sendMessage("[TitlePlugin]§2已从玩家" + playername + "移除称号ID" + title_id);
         }else{
-            sender.sendMessage("§4[TitlePlugin]从玩家" + playername + "移除称号ID" + title_id + "失败!");
+            sender.sendMessage("[TitlePlugin]§4从玩家" + playername + "移除称号ID" + title_id + "失败!");
         }
     }
 

@@ -15,9 +15,9 @@ public class AddTitle {
         sql += "false, ";
         sql += "false)";
         if(Sql().query(sql, sender)){
-            sender.sendMessage("§2[TitlePlugin]已向玩家" + playername + "添加称号ID" + title_id);
+            sender.sendMessage("[TitlePlugin]§2已向玩家" + playername + "添加称号ID" + title_id);
         }else{
-            sender.sendMessage("§4[TitlePlugin]向玩家" + playername + "添加称号ID" + title_id + "失败");
+            sender.sendMessage("[TitlePlugin]§4向玩家" + playername + "添加称号ID" + title_id + "失败");
         }
     }
 
@@ -31,9 +31,9 @@ public class AddTitle {
         sql += "false, ";
         sql += "false)";
         if(Sql().query(sql, sender)){
-            sender.sendMessage("§2[TitlePlugin]已向玩家" + playername + "添加称号ID" + title_id);
+            sender.sendMessage("[TitlePlugin]§2已向玩家" + playername + "添加称号ID" + title_id);
         }else{
-            sender.sendMessage("§4[TitlePlugin]向玩家" + playername + "添加称号ID" + title_id + "失败");
+            sender.sendMessage("[TitlePlugin]§4向玩家" + playername + "添加称号ID" + title_id + "失败");
         }
     }
 

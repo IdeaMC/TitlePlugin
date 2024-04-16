@@ -45,15 +45,15 @@ public class BuyTitle {
                             sql1 += " false)";
                         }
                         if(Sql().query(sql1,sender)){
-                            sender.sendMessage("§2[TitlePlugin]称号ID" + title_id + "成功!");
+                            sender.sendMessage("[TitlePlugin]§2称号ID" + title_id + "成功!");
                         }else{
-                            sender.sendMessage("§4[TitlePlugin]称号ID" + title_id + "失败!");
+                            sender.sendMessage("[TitlePlugin]§4称号ID" + title_id + "失败!");
                         }
                     }
                 }
             }
         }else{
-            sender.sendMessage("§4[TitlePlugin]输入的称号ID有误!");
+            sender.sendMessage("[TitlePlugin]§4输入的称号ID有误!");
         }
     }
 
@@ -87,17 +87,17 @@ public class BuyTitle {
                             sql1 += " false)";
                         }
                         if(Sql().query(sql1,sender)){
-                            sender.sendMessage("§2[TitlePlugin]购买成功!");
+                            sender.sendMessage("[TitlePlugin]§2购买成功!");
                         }else{
-                            sender.sendMessage("§4[TitlePlugin]购买失败!");
+                            sender.sendMessage("[TitlePlugin]§4购买失败!");
                         }
                     }
                 }else{
-                    sender.sendMessage("§4[TitlePlugin]该称号无法购买!");
+                    sender.sendMessage("[TitlePlugin]§4该称号无法购买!");
                 }
             }
         }else{
-            sender.sendMessage("§4[TitlePlugin]输入的称号ID有误!");
+            sender.sendMessage("[TitlePlugin]§4输入的称号ID有误!");
         }
     }
 }

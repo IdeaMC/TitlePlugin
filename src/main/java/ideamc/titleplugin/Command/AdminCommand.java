@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import static ideamc.titleplugin.GUI.ListGui.showListGui;
 import static ideamc.titleplugin.Title.AddTitle.addtitle;
 import static ideamc.titleplugin.Title.CreateTitle.createtitle;
 import static ideamc.titleplugin.Title.DelTitle.delatitle;
@@ -18,7 +19,10 @@ public class AdminCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(sender.hasPermission("titleplugin.op") | sender.isOp()){
-            if(command.getName().equalsIgnoreCase("atip") && args.length == 4 && args[0].equalsIgnoreCase("create") && args[1].equalsIgnoreCase("activity")){
+            if(command.getName().equalsIgnoreCase("atip") && args.length == 1 && args[0].equalsIgnoreCase("list")){
+                showListGui(sender);
+                return true;
+            } else if(command.getName().equalsIgnoreCase("atip") && args.length == 4 && args[0].equalsIgnoreCase("create") && args[1].equalsIgnoreCase("activity")){
                 createtitle(sender, "activity", args[2], args[3]);
                 return true;
             }else if(command.getName().equalsIgnoreCase("atip") && args.length == 5 && args[0].equalsIgnoreCase("create") && args[1].equalsIgnoreCase("coin")){
@@ -86,6 +90,7 @@ public class AdminCommand implements CommandExecutor {
 
     private final String[] adminhelp = {
             "§6======================TitlePlugin=======================",
+            "§3/atip list ---展示所有称号",
             "§3/atip create activity [称号名称] [称号描述] ---创建活动称号",
             "§3/atip create coin [称号名称] [称号描述] [金币] ---创建金币称号",
             "§3/atip create points [称号名称] [称号描述] [点券] ---创建点券称号",

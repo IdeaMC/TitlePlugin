@@ -6,6 +6,7 @@ import ideamc.titleplugin.Command.TabCommand;
 import ideamc.titleplugin.Event.TitleSaleEndDateEvent;
 import ideamc.titleplugin.Event.playerJoinEvent;
 import ideamc.titleplugin.GUI.GeRenGui;
+import ideamc.titleplugin.GUI.ListGui;
 import ideamc.titleplugin.GUI.ShopGui;
 import ideamc.titleplugin.SQL.Sql;
 import ideamc.titleplugin.SQL.MySQL;
@@ -30,6 +31,13 @@ public class TitlePlugin extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
         config = getConfig();
+
+        new Metrics(this, 21615);
+
+        //检查更新
+        if(config.getBoolean("checkupdata")){
+            CheckUpdata.CheckUpdates(getDescription().getVersion());
+        }
 
         if(config.getString("SQL.type").equalsIgnoreCase("mysql")){
             MySQL.MysqlConfig();
@@ -63,6 +71,7 @@ public class TitlePlugin extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage("[TitlePlugin]§4前置PlaceholderAPI未找到,变量功能无法使用!");
         }
 
+        new ListGui(this);
         new ShopGui(this);
         new GeRenGui(this);
         new playerJoinEvent(this);

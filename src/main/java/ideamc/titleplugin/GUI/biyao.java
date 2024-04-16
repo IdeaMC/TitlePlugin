@@ -19,7 +19,7 @@ public class biyao {
         String sql = "SELECT * FROM Title";
         List<TitleData> rs = Sql().readeventquery(sql, "title");
 
-        String sql1 = "SELECT title_id FROM PlayerTitle WHERE player_uuid = '" + player.getUniqueId().toString() + "'";
+        String sql1 = "SELECT * FROM PlayerTitle WHERE player_uuid = '" + player.getUniqueId().toString() + "'";
         List<TitleData> rs1 = Sql().readeventquery(sql1, "playertitle");
         Set<Integer> playerhvae = new HashSet<>();
         if(rs1 != null){
@@ -141,6 +141,34 @@ public class biyao {
         return titles;
     }
 
+    public static List<TitleData> readlistdatabase(Player player) {
+        List<TitleData> titles = new ArrayList<>();
+
+        String sql = "SELECT * FROM Title";
+        List<TitleData> rs = Sql().readeventquery(sql, "title");
+
+        if(rs != null){
+            for(TitleData t : rs){
+                int titleId = t.getTitleId();
+                String titleName = t.getTitleName();
+                String type = t.getType();
+                String description = t.getDescription();
+                int coin = t.getCoin();
+                int point = t.getPoints();
+                boolean canBuy = t.isCanBuy();
+                String permission = t.getPermission();
+                int youxiao = t.getYouxiao();
+                String saleEndDate = t.getSaleEndDate();
+
+                titles.add(new TitleData(titleId, titleName, type, description, coin, point, canBuy, permission, youxiao, saleEndDate, null, null, false, false));
+            }
+        }else{
+            player.sendMessage("§4[TitlePlugin]商店中没有称号!");
+        }
+
+        return titles;
+    }
+
     public static ItemStack createGeRenTitleItem(TitleData titleData) {
         ItemStack item = new ItemStack(Material.NAME_TAG);
         ItemMeta meta = item.getItemMeta();
@@ -166,6 +194,7 @@ public class biyao {
         return item;
     }
 
+    //自定义数据类型
     public static class TitleData {
         int titleId;
         String titleName;

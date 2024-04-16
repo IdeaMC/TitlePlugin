@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -22,8 +23,8 @@ import static ideamc.titleplugin.TitlePlugin.Sql;
 
 public class GeRenGui implements Listener {
     private static final int itemsPerPage = 45; // 每页45个物品
-    private static int totalPages;
-    private static int currentPage;
+    private static int totalPages; //总页数
+    private static int currentPage; //当前页
     private static Inventory gui;
     private static List<biyao.TitleData> titles;
 
@@ -91,13 +92,13 @@ public class GeRenGui implements Listener {
         if (clickedInventory != null && clickedInventory.equals(gui)) {
             event.setCancelled(true); // 防止玩家直接拿取物品
 
-            if (clickedInventory.contains(Material.NAME_TAG)) {
+            if (event.getCurrentItem().getType() == Material.NAME_TAG) {
 
-                String stitle_id = clickedInventory.getItem(event.getSlot()).getItemMeta().getDisplayName();
+                String stitle_id = event.getCurrentItem().getItemMeta().getDisplayName();
                 int title_id = Integer.parseInt(stitle_id);
 
-                if (event.getAction().toString().contains("LEFT")) {
-                    String sql = "SELECT prefix_enable FROM PlayerTitle WHERE player_uuid = '" + stplayer_uuid + "' AND title_id = '" + title_id + "'";
+                if (event.isLeftClick()) {
+                    String sql = "SELECT * FROM PlayerTitle WHERE player_uuid = '" + stplayer_uuid + "' AND title_id = '" + title_id + "'";
                     List<biyao.TitleData> rs = Sql().readquery(sql, player, "playertitle");
                     if (rs != null) {
                         for(biyao.TitleData t : rs){
@@ -108,9 +109,11 @@ public class GeRenGui implements Listener {
                                 sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
                                 sql1 += " AND title_id = '" + title_id + "'";
                                 if (Sql().eventquery(sql1)) {
-                                    player.sendMessage("§2[TitlePlugin]前缀已禁用!");
+                                    player.sendMessage("[TitlePlugin]§2前缀已禁用!");
+                                    refillInventory(player);
                                 } else {
-                                    player.sendMessage("§4[TitlePlugin]前缀已禁失败!");
+                                    player.sendMessage("[TitlePlugin]§4前缀已禁失败!");
+                                    refillInventory(player);
                                 }
                             } else {
                                 String sql1 = "UPDATE PlayerTitle ";
@@ -118,39 +121,45 @@ public class GeRenGui implements Listener {
                                 sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
                                 sql1 += " AND title_id = '" + title_id + "'";
                                 if (Sql().eventquery(sql1)) {
-                                    player.sendMessage("§2[TitlePlugin]前缀已启用!");
+                                    player.sendMessage("[TitlePlugin]§2前缀已启用!");
+                                    refillInventory(player);
                                 } else {
-                                    player.sendMessage("§4[TitlePlugin]前缀启用失败!");
+                                    player.sendMessage("[TitlePlugin]§4前缀启用失败!");
+                                    refillInventory(player);
                                 }
                             }
                         }
 
-                    } else if (event.getAction().toString().contains("RIGHT")) {
-                        String sql2 = "SELECT prefix_enable FROM PlayerTitle WHERE player_uuid = " + stplayer_uuid + " AND title_id = '" + title_id + "'";
-                        List<biyao.TitleData> rs2 = Sql().readquery(sql2, player, "playertitle");
-                        if (rs2 != null) {
-                            for(biyao.TitleData t : rs2){
-                                boolean type = t.isSuffixEnable();
-                                if (type) {
-                                    String sql1 = "UPDATE PlayerTitle ";
-                                    sql1 += "SET suffix_enable = false";
-                                    sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
-                                    sql1 += " AND title_id = '" + title_id + "'";
-                                    if (Sql().eventquery(sql1)) {
-                                        player.sendMessage("§2[TitlePlugin]后缀已禁用!");
-                                    } else {
-                                        player.sendMessage("§4[TitlePlugin]后缀已禁失败!");
-                                    }
+                    }
+                }else if (event.isRightClick()) {
+                    String sql2 = "SELECT * FROM PlayerTitle WHERE player_uuid = " + stplayer_uuid + " AND title_id = '" + title_id + "'";
+                    List<biyao.TitleData> rs2 = Sql().readquery(sql2, player, "playertitle");
+                    if (rs2 != null) {
+                        for(biyao.TitleData t : rs2){
+                            boolean type = t.isSuffixEnable();
+                            if (type) {
+                                String sql1 = "UPDATE PlayerTitle ";
+                                sql1 += "SET suffix_enable = false";
+                                sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
+                                sql1 += " AND title_id = '" + title_id + "'";
+                                if (Sql().eventquery(sql1)) {
+                                    player.sendMessage("[TitlePlugin]§2后缀已禁用!");
+                                    refillInventory(player);
                                 } else {
-                                    String sql1 = "UPDATE PlayerTitle ";
-                                    sql1 += "SET suffix_enable = true";
-                                    sql1 += " WHERE player_uuid = " + stplayer_uuid;
-                                    sql1 += " AND title_id = " + title_id;
-                                    if (Sql().eventquery(sql1)) {
-                                        player.sendMessage("§2[TitlePlugin]后缀已启用!");
-                                    } else {
-                                        player.sendMessage("§4[TitlePlugin]后缀启用失败!");
-                                    }
+                                    player.sendMessage("[TitlePlugin]§4后缀已禁失败!");
+                                    refillInventory(player);
+                                }
+                            } else {
+                                String sql1 = "UPDATE PlayerTitle ";
+                                sql1 += "SET suffix_enable = true";
+                                sql1 += " WHERE player_uuid = " + stplayer_uuid;
+                                sql1 += " AND title_id = " + title_id;
+                                if (Sql().eventquery(sql1)) {
+                                    player.sendMessage("[TitlePlugin]§2后缀已启用!");
+                                    refillInventory(player);
+                                } else {
+                                    player.sendMessage("[TitlePlugin]§4后缀启用失败!");
+                                    refillInventory(player);
                                 }
                             }
                         }

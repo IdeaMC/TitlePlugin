@@ -31,7 +31,7 @@ public class playerJoinEvent implements Listener {
         UUID player_uuid = player.getUniqueId();
         String stplayer_uuid = player_uuid.toString();
 
-        String sql = "SELECT DISTINCT permission FROM Title";
+        String sql = "SELECT DISTINCT * FROM Title";
         List<biyao.TitleData> rs = Sql().readeventquery(sql, "title");
         Set<String> uniquePermissions = new HashSet<>();
         if(rs != null){
@@ -42,7 +42,7 @@ public class playerJoinEvent implements Listener {
                 }
             }
             if(!uniquePermissions.isEmpty()){
-                String sql1 = "SELECT title_id FROM PlayerTitle WHERE player_uuid = " + "'" + stplayer_uuid + "'";
+                String sql1 = "SELECT * FROM PlayerTitle WHERE player_uuid = " + "'" + stplayer_uuid + "'";
                 List<biyao.TitleData> rs1 = Sql().readeventquery(sql1, "playertitle");
                 ArrayList<Integer> title_id = new ArrayList<>();//玩家所拥有的称号ID集合
                 if(rs1 != null){
@@ -54,7 +54,7 @@ public class playerJoinEvent implements Listener {
                     for (String permission : uniquePermissions){
                         Permission per = new Permission(permission);
                         if(player.hasPermission(per)){
-                            String sql2 = "SELECT title_id FROM Title WHERE permission = " + "'" + permission + "'";
+                            String sql2 = "SELECT * FROM Title WHERE permission = " + "'" + permission + "'";
                             List<biyao.TitleData> rs2 = Sql().readeventquery(sql2, "title");
                             if(rs2 != null){
                                 for(biyao.TitleData t2 : rs2){
@@ -70,7 +70,7 @@ public class playerJoinEvent implements Listener {
                                 }
                             }
                         }else{
-                            String sql2 = "SELECT title_id FROM Title WHERE permission = " + "'" + permission + "'";
+                            String sql2 = "SELECT * FROM Title WHERE permission = " + "'" + permission + "'";
                             List<biyao.TitleData> rs2 = Sql().readeventquery(sql2, "title");
                             if(rs2 != null){
                                 for(biyao.TitleData t2 : rs2){
@@ -96,7 +96,7 @@ public class playerJoinEvent implements Listener {
         UUID player_uuid = player.getUniqueId();
         String stplayer_uuid = player_uuid.toString();
 
-        String sql = "SELECT DISTINCT expiration_date, title_id FROM PlayerTitle WHERE player_uuid = " + "'" + stplayer_uuid + "'";
+        String sql = "SELECT DISTINCT * FROM PlayerTitle WHERE player_uuid = " + "'" + stplayer_uuid + "'";
         List<biyao.TitleData> rs = Sql().readeventquery(sql, "playertitle");
         if(rs != null){
             for(biyao.TitleData t : rs){

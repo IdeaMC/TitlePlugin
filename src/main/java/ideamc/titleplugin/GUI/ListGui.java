@@ -14,33 +14,30 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-import static ideamc.titleplugin.GUI.biyao.readshopdatabase;
 import static ideamc.titleplugin.GUI.biyao.createShopTitleItem;
-import static ideamc.titleplugin.Title.BuyTitle.buycoin;
-import static ideamc.titleplugin.Title.BuyTitle.buypoint;
-import static ideamc.titleplugin.TitlePlugin.Sql;
+import static ideamc.titleplugin.GUI.biyao.readlistdatabase;
 
-public class ShopGui implements Listener {
+public class ListGui implements Listener {
     private static final int itemsPerPage = 45; // 每页45个物品
     private static int totalPages;
     private static int currentPage;
     private static Inventory gui;
     private static List<biyao.TitleData> titles;
 
-    public ShopGui(TitlePlugin plugin){
+    public ListGui(TitlePlugin plugin) {
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
-    public static void showShopGui(CommandSender sender) {
-        titles = readshopdatabase((Player) sender);
+
+    public static void showListGui(CommandSender sender) {
+        titles = readlistdatabase((Player) sender);
         totalPages = (titles.size() + itemsPerPage - 1) / itemsPerPage;
         currentPage = 0;
 
         gui = Bukkit.createInventory(null, 54, "称号商店");
 
         refillInventory((Player) sender);
-
-
     }
+
     private static void refillInventory(Player player) {
         // 清空当前Inventory
         if(gui !=null){
@@ -87,26 +84,6 @@ public class ShopGui implements Listener {
 
         if (clickedInventory != null && clickedInventory.equals(gui)) {
             event.setCancelled(true); // 防止玩家直接拿取物品
-
-            if(event.getCurrentItem().getType() == Material.NAME_TAG){
-                String stitle_id = event.getCurrentItem().getItemMeta().getDisplayName();
-                int title_id = Integer.parseInt(stitle_id);
-                String sql = "SELECT * FROM Title WHERE title_id = '" + title_id + "'";
-                List<biyao.TitleData> rs = Sql().readquery(sql, player, "title");
-                if(rs != null){
-                    for(biyao.TitleData t : rs){
-                        String type = t.getType();
-                        if(type.equals("coin")){
-                            buycoin(player, title_id);
-                        }else if(type.equals("points")){
-                            buypoint(player, title_id);
-                        }else{
-                            player.sendMessage("[TitlePlugin]§4此称号不能购买");
-                            player.closeInventory();
-                        }
-                    }
-                }
-            }
 
             int slot = event.getRawSlot();
 
