@@ -29,7 +29,7 @@ public class Papi extends PlaceholderExpansion {
     @Override
     @NotNull
     public String getIdentifier() {
-        return "papi";
+        return "TitlePlugin";
     }
 
     @Override
