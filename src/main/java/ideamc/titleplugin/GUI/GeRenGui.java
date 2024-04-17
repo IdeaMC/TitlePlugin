@@ -90,7 +90,7 @@ public class GeRenGui implements Listener {
         if (clickedInventory != null && clickedInventory.equals(gui)) {
             event.setCancelled(true); // 防止玩家直接拿取物品
 
-            if (event.getCurrentItem().getType() == Material.NAME_TAG) {
+            if (event.getCurrentItem() != null && event.getCurrentItem().getType() == Material.NAME_TAG) {
 
                 String stitle_id = event.getCurrentItem().getItemMeta().getDisplayName();
                 int title_id = Integer.parseInt(stitle_id);
@@ -118,6 +118,24 @@ public class GeRenGui implements Listener {
                                 sql1 += "SET prefix_enable = true";
                                 sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
                                 sql1 += " AND title_id = '" + title_id + "'";
+
+                                String sql2 = "SELECT * FROM PlayerTitle WHERE player_uuid = '" + stplayer_uuid + "' AND prefix_enable = true";
+                                List<biyao.TitleData> rs2 = Sql().readquery(sql2, player, "playertitle");
+                                if(rs2 != null){
+                                    for(biyao.TitleData t2 : rs2){
+                                        if(t2.isPrefixEnable()){
+                                            String sql3 = "UPDATE PlayerTitle ";
+                                            sql3 += "SET prefix_enable = false";
+                                            sql3 += " WHERE player_uuid = '" + stplayer_uuid + "'";
+                                            sql3 += " AND title_id = '" + t2.getTitleId() + "'";
+                                            if (Sql().query(sql3, player)) {
+
+                                            } else {
+                                                player.sendMessage("[TitlePlugin]§4禁用已启用前缀失败!");
+                                            }
+                                        }
+                                    }
+                                }
                                 if (Sql().eventquery(sql1)) {
                                     player.sendMessage("[TitlePlugin]§2前缀已启用!");
                                     showGeRenGui(player);
@@ -152,6 +170,24 @@ public class GeRenGui implements Listener {
                                 sql1 += "SET suffix_enable = true";
                                 sql1 += " WHERE player_uuid = '" + stplayer_uuid + "'";
                                 sql1 += " AND title_id = '" + title_id + "'";
+
+                                String s = "SELECT * FROM PlayerTitle WHERE player_uuid = '" + stplayer_uuid + "' AND suffix_enable = true";
+                                List<biyao.TitleData> rss = Sql().readquery(s, player, "playertitle");
+                                if(rss != null){
+                                    for(biyao.TitleData st : rss){
+                                        if(st.isPrefixEnable()){
+                                            String sql4 = "UPDATE PlayerTitle ";
+                                            sql4 += "SET suffix_enable = false";
+                                            sql4 += " WHERE player_uuid = '" + stplayer_uuid + "'";
+                                            sql4 += " AND title_id = '" + st.getTitleId() + "'";
+                                            if (Sql().query(sql4, player)) {
+
+                                            } else {
+                                                player.sendMessage("[TitlePlugin]§4禁用已启用后缀失败!");
+                                            }
+                                        }
+                                    }
+                                }
                                 if (Sql().eventquery(sql1)) {
                                     player.sendMessage("[TitlePlugin]§2后缀已启用!");
                                     showGeRenGui(player);

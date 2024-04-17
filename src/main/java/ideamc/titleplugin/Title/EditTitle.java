@@ -65,7 +65,7 @@ public class EditTitle {
     public static void edittitle(CommandSender sender, int title_id, String changetype, int a){
         if(changetype.equalsIgnoreCase("setcoin")){
             String sql = "UPDATE Title ";
-            sql += "SET coin = " + a;
+            sql += "SET vault = " + a;
             sql += " WHERE title_id = " + title_id;
             if(Sql().query(sql,sender)){
                 sender.sendMessage("[TitlePlugin]§2修改成功!");

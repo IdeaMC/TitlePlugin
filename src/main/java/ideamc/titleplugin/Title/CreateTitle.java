@@ -15,6 +15,8 @@ public class CreateTitle {
         String Ctitlename = titleName;
         if(titleName.contains("&#")){
             Ctitlename = ColorB(titleName);
+        }else if(titleName.contains("&")){
+            Ctitlename = ColorB(titleName);
         }
         if(type.equalsIgnoreCase("activity")){
             sql = "INSERT INTO Title (type,title_name,description,canbuy,vault,playerpoints,youxiao,sale_end_date) ";
@@ -49,6 +51,8 @@ public class CreateTitle {
         String sql =null;
         String Ctitlename = titleName;
         if(titleName.contains("&#")){
+            Ctitlename = ColorB(titleName);
+        }else if(titleName.contains("&")){
             Ctitlename = ColorB(titleName);
         }
         if(type.equalsIgnoreCase("coin")){
@@ -95,6 +99,8 @@ public class CreateTitle {
         String sql =null;
         String Ctitlename = titleName;
         if(titleName.contains("&#")){
+            Ctitlename = ColorB(titleName);
+        }else if(titleName.contains("&")){
             Ctitlename = ColorB(titleName);
         }
         if(type.equalsIgnoreCase("permission")){

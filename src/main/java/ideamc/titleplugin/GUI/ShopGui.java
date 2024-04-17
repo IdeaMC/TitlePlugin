@@ -88,7 +88,7 @@ public class ShopGui implements Listener {
         if (clickedInventory != null && clickedInventory.equals(gui)) {
             event.setCancelled(true); // 防止玩家直接拿取物品
 
-            if(event.getCurrentItem().getType() == Material.NAME_TAG){
+            if(event.getCurrentItem() != null && event.getCurrentItem().getType() == Material.NAME_TAG){
                 String stitle_id = event.getCurrentItem().getItemMeta().getDisplayName();
                 int title_id = Integer.parseInt(stitle_id);
                 String sql = "SELECT * FROM Title WHERE title_id = '" + title_id + "'";
